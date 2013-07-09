@@ -68,13 +68,13 @@ nnoremap <silent> <leader>l
 			\	endif<CR>
 
 " Colorscheme, duh
-colorscheme xcolors
+"colorscheme xcolors
 
 " Highlight the current line!
 set cursorline
 hi CursorLine cterm=bold gui=bold guibg=bg
 
-set wildignore+=*.class,*.jar,*.apk,*/*doc/*,*/api/*,*/bin/*
+set wildignore+=*.class,*.jar,*.apk,*/*doc/*,*/api/*,*/bin/*,*/vendor/*,*/log/*,*/sql/*
 
 " Override the .md file extension to be for markdown instead of modula
 au BufRead,BufNewFile *.md set filetype=markdown
