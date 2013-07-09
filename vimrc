@@ -44,6 +44,9 @@ nmap <silent> <leader>b :CtrlPBuffer<CR>
 " Clear the search highlight with <leader>/
 nmap <silent> <leader>/ :nohlsearch<CR>
 
+" Toggle NERDTree with leader-f
+nmap <silent> <leader>f :NERDTreeToggle<CR>
+
 " Display trailing whitespace as an error
 match ErrorMsg /\s\+$/
 
