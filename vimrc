@@ -28,8 +28,8 @@ set incsearch
 set smartindent
 set autoindent
 set expandtab
-set backupdir=~/.tmp/
-set directory=~/.tmp/
+set backupdir=~/.vim/swp/
+set directory=~/.vim/swp/
 
 filetype plugin indent on
 
