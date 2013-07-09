@@ -28,6 +28,8 @@ set incsearch
 set smartindent
 set autoindent
 set expandtab
+set backupdir=~/.tmp/
+set directory=~/.tmp/
 
 filetype plugin indent on
 
