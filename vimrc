@@ -71,7 +71,8 @@ nnoremap <silent> <leader>l
 			\	endif<CR>
 
 " Colorscheme, duh
-"colorscheme xcolors
+set background=dark
+colorscheme solarized
 
 " Highlight the current line!
 set cursorline
