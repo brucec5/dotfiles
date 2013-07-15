@@ -86,3 +86,7 @@ set wildignore+=*.class,*.jar,*.apk,*/*doc/*,*/api/*,*/bin/*,*/vendor/*,*/log/*,
 au BufRead,BufNewFile *.md set filetype=markdown
 
 let g:vim_markdown_folding_disabled=1
+
+" Turn off the damn bell
+set noeb vb t_vb=
+au GUIEnter * set vb t_vb=
