@@ -4,3 +4,4 @@ set guifont=Osaka-Mono:h12
 set guioptions-=T
 set guioptions-=r
 set guioptions-=m
+set guioptions-=L

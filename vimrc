@@ -90,3 +90,6 @@ let g:vim_markdown_folding_disabled=1
 " Turn off the damn bell
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
+
+" Turn on indent guides at start?
+let g:indent_guides_enable_on_vim_startup=1
