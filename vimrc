@@ -72,9 +72,14 @@ nnoremap <silent> <leader>l
 			\		let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
 			\	endif<CR>
 
-" Colorscheme, duh
-set background=dark
-colorscheme solarized
+" Colorscheme, duh. But load different ones on linux and mac.
+let s:uname = system("echo -n \"$(uname)\"")
+if s:uname == "Linux"
+  colorscheme xcolors
+else
+  set background=dark
+  colorscheme solarized
+endif
 
 " Highlight the current line!
 set cursorline
