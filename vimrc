@@ -80,7 +80,7 @@ colorscheme solarized
 set cursorline
 hi CursorLine cterm=bold gui=bold guibg=bg
 
-set wildignore+=*.class,*.jar,*.apk,*/*doc/*,*/api/*,*/bin/*,*/vendor/*,*/log/*,*/sql/*
+set wildignore+=*.class,*.jar,*.apk,*/*doc/*,*/bin/*,*/vendor/*,*/log/*,*/sql/*
 
 " Override the .md file extension to be for markdown instead of modula
 au BufRead,BufNewFile *.md set filetype=markdown
