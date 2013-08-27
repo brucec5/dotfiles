@@ -16,9 +16,10 @@ Bundle 'tpope/vim-endwise.git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/nerdtree.git'
-Bundle 'altercation/vim-colors-solarized.git'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle 'nathanaelkane/vim-indent-guides.git'
+Bundle 'godlygeek/tabular'
+Bundle 'zeis/vim-kolor'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'airblade/vim-gitgutter'
 
 " make plugin loading easier
 "call pathogen#infect()
@@ -27,8 +28,8 @@ Bundle 'nathanaelkane/vim-indent-guides.git'
 let mapleader=","
 
 " Quickly edit/reload the .vimrc
-nmap <silent> <leader>ev :e /home/chris/.vimrc<CR>
-nmap <silent> <leader>sv :so /home/chris/.vimrc<CR>
+nmap <silent> <leader>ev :e ~/.vimrc<CR>
+nmap <silent> <leader>sv :so ~/.vimrc<CR>
 
 syntax on
 set hidden
@@ -98,7 +99,7 @@ if s:uname == "Linux"
   colorscheme xcolors
 else
   set background=dark
-  colorscheme solarized
+  colorscheme kolor
 endif
 
 " Highlight the current line!
@@ -115,6 +116,10 @@ let g:vim_markdown_folding_disabled=1
 " Turn off the damn bell
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
+
+" Mapping for tabularizing on equals
+nmap <silent> <leader><Tab>= :Tab /=<CR>
+nmap <silent> <leader><Tab>> :Tab /=><CR>
 
 " Turn on indent guides at start?
 let g:indent_guides_enable_on_vim_startup=1
