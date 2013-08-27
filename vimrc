@@ -1,7 +1,27 @@
 set nocompatible
 
+" For Vundle
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'kien/ctrlp.vim'
+Bundle 'henrik/vim-indexed-search.git'
+Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'kchmck/vim-coffee-script.git'
+Bundle 'tpope/vim-endwise.git'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'fholgado/minibufexpl.vim'
+Bundle 'nathanaelkane/vim-indent-guides.git'
+
 " make plugin loading easier
-call pathogen#infect()
+"call pathogen#infect()
 
 "change mapleader to , from \
 let mapleader=","
