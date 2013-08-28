@@ -7,7 +7,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
 Bundle 'henrik/vim-indexed-search.git'
 Bundle 'scrooloose/nerdcommenter.git'
@@ -120,6 +120,16 @@ au GUIEnter * set vb t_vb=
 " Mapping for tabularizing on equals
 nmap <silent> <leader><Tab>= :Tab /=<CR>
 nmap <silent> <leader><Tab>> :Tab /=><CR>
+
+" Map <C-movement key> to move buffers
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
+map <C-Up> <C-w><Up>
+map <C-Down> <C-w><Down>
+map <C-Right> <C-w><Right>
+map <C-Left> <C-w><Left>
 
 " Turn on indent guides at start?
 let g:indent_guides_enable_on_vim_startup=1
