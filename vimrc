@@ -17,9 +17,9 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'godlygeek/tabular'
-Bundle 'zeis/vim-kolor'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'chriskempson/base16-vim'
 
 " make plugin loading easier
 "call pathogen#infect()
@@ -99,7 +99,7 @@ if s:uname == "Linux"
   colorscheme xcolors
 else
   set background=dark
-  colorscheme kolor
+  colorscheme base16-ocean
 endif
 
 " Highlight the current line!
