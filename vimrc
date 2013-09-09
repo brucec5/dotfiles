@@ -34,6 +34,7 @@ nmap <silent> <leader>sv :so ~/.vimrc<CR>
 syntax on
 set hidden
 set number
+set ruler
 set tabstop=2
 set backspace=indent,eol,start
 set autoindent
