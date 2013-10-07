@@ -1,2 +1,4 @@
 --ignore-dir=log
+--ignore-dir=tmp
 --ignore-dir=sql
+--ignore-dir=public
