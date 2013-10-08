@@ -18,7 +18,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'godlygeek/tabular'
 Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'airblade/vim-gitgutter'
+"Bundle 'airblade/vim-gitgutter'
 Bundle 'chriskempson/base16-vim'
 
 " make plugin loading easier
@@ -134,3 +134,6 @@ map <C-Left> <C-w><Left>
 
 " Turn on indent guides at start?
 let g:indent_guides_enable_on_vim_startup=1
+
+" Autosave on focus loss
+autocmd BufLeave,FocusLost * silent! wall

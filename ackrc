@@ -2,3 +2,4 @@
 --ignore-dir=tmp
 --ignore-dir=sql
 --ignore-dir=public
+--ignore-dir=vendor
