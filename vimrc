@@ -7,7 +7,6 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-"Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
 Bundle 'henrik/vim-indexed-search.git'
 Bundle 'scrooloose/nerdcommenter.git'
@@ -18,11 +17,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'godlygeek/tabular'
 Bundle 'nathanaelkane/vim-indent-guides'
-"Bundle 'airblade/vim-gitgutter'
 Bundle 'chriskempson/base16-vim'
-
-" make plugin loading easier
-"call pathogen#infect()
 
 "change mapleader to , from \
 let mapleader=","
