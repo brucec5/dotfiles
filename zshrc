@@ -61,6 +61,10 @@ alias glog='nocorrect git log'
 alias gco='nocorrect git checkout'
 alias gcob='nocorrect git checkout -b'
 alias gcod='nocorrect git checkout develop'
+alias gcom='nocorrect git checkout master'
+alias gpu='nocorrect git pull'
+alias gst='nocorrect git stash'
+alias gstp='nocorrect git stash pop'
 compdef _git gs=git-status
 
 # Keybindings!
