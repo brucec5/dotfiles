@@ -66,6 +66,8 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 " Toggle NERDTree with leader-f
 nmap <silent> <leader>f :NERDTreeToggle<CR>
 
+nnoremap <silent> <F1> <NOP>
+
 " Display trailing whitespace as an error
 match ErrorMsg /\s\+$/
 
@@ -95,7 +97,7 @@ if s:uname == "Linux"
   colorscheme xcolors
 else
   set background=dark
-  colorscheme base16-ocean
+  colorscheme base16-eighties
 endif
 
 " Highlight the current line!
@@ -116,6 +118,7 @@ au GUIEnter * set vb t_vb=
 " Mapping for tabularizing on equals
 nmap <silent> <leader><Tab>= :Tab /=<CR>
 nmap <silent> <leader><Tab>> :Tab /=><CR>
+nmap <silent> <leader><Tab>{ :Tab /{<CR>
 
 " Map <C-movement key> to move buffers
 map <C-k> <C-w><Up>
