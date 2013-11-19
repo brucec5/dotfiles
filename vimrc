@@ -18,6 +18,7 @@ Bundle 'scrooloose/nerdtree.git'
 Bundle 'godlygeek/tabular'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'chriskempson/base16-vim'
+Bundle 'szw/vim-tags'
 
 "change mapleader to , from \
 let mapleader=","
@@ -60,6 +61,8 @@ nnoremap <silent> <C-S> <NOP>
 nmap <silent> <leader>t :CtrlP<CR>
 
 nmap <silent> <leader>b :CtrlPBuffer<CR>
+
+nmap <silent> <leader>g :CtrlPTag<CR>
 " Clear the search highlight with <leader>/
 nmap <silent> <leader>/ :nohlsearch<CR>
 

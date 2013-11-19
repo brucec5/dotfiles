@@ -3,3 +3,4 @@
 --ignore-dir=sql
 --ignore-dir=public
 --ignore-dir=vendor
+--ignore-file=is:tags
