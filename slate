@@ -41,3 +41,8 @@ bind esc:cmd hint ASDFJKLGHWERTYUIOXCVM
 
 # Relaunch!
 bind esc:cmd;ctrl;alt;shift relaunch
+
+# MPD Commands
+bind f7:cmd shell "/usr/local/bin/ncmpcpp prev"
+bind f8:cmd shell "/usr/local/bin/ncmpcpp toggle"
+bind f9:cmd shell "/usr/local/bin/ncmpcpp next"
