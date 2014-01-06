@@ -10,9 +10,9 @@ function _rprompt_exit_status() {
   _EXIT_STATUS=$?
 
   if (( $_EXIT_STATUS == 0 )); then
-    echo "%{%F{cyan}%}<< $_EXIT_STATUS >>%{%f%k%b%}"
+    echo "%{%F{cyan}%}$_EXIT_STATUS%{%f%k%b%}"
   else
-  	echo "%{%F{red}%}>> $_EXIT_STATUS <<%{%f%k%b%}"
+  	echo "%{%F{red}%}$_EXIT_STATUS%{%f%k%b%}"
   fi
 }
 
