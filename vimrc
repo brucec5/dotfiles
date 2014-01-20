@@ -19,6 +19,8 @@ Bundle 'godlygeek/tabular'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'chriskempson/base16-vim'
 Bundle 'szw/vim-tags'
+Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-surround'
 
 "change mapleader to , from \
 let mapleader=","
