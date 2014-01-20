@@ -47,7 +47,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/.rvm/bin:/Users/chris/bin:$PATH
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/.rvm/gems/ruby-1.9.3-p484@fa_management_gateway/bin:/Users/chris/.rvm/bin:/Users/chris/bin:$PATH
 
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
@@ -56,6 +56,8 @@ alias gut='nocorrect git'
 alias fig='nocorrect git'
 alias gph='nocorrect git push origin HEAD'
 alias gs='nocorrect git status'
+alias gca='nocorrect git commit -a'
+alias gcm='nocorrect git commit -m'
 alias gcam='nocorrect git commit -am'
 alias glog='nocorrect git log'
 alias gco='nocorrect git checkout'
