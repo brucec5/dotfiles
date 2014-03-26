@@ -48,8 +48,10 @@ set incsearch
 set smartindent
 set autoindent
 set expandtab
-set backupdir=~/.vim/swp/
-set directory=~/.vim/swp/
+set nobackup
+set nowritebackup
+set noswapfile
+
 
 filetype plugin indent on
 
@@ -108,9 +110,16 @@ endif
 
 " Highlight the current line!
 set cursorline
-hi CursorLine cterm=bold gui=bold guibg=bg
+"hi CursorLine cterm=bold gui=bold guibg=bg
 
-set wildignore+=*.class,*.jar,*.apk,*/*doc/*,*/bin/*,*/vendor/*,*/log/*,*/sql/*
+set wildignore+=*/tmp/*,*/vendor/*,*/log/*,*/sql/*
+
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files . -co --exclude-standard'],
+    \ }
+  \ 'fallback': 'find %s -type f'
+  \ }
 
 " Override the .md file extension to be for markdown instead of modula
 au BufRead,BufNewFile *.md set filetype=markdown
