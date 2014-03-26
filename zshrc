@@ -47,7 +47,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/.rvm/bin:/Users/chris/bin:$PATH
+PATH=$PATH:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/bin
 
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
