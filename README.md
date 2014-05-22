@@ -1,6 +1,6 @@
 ## Dotfiles!
 
-Clone this into `~/dotfiles` or wherever you what. See if I care.
+Clone this into `~/dotfiles` or wherever you want. See if I care.
 
 Then, just symlink the config files to the proper places.
 
