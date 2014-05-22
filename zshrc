@@ -47,7 +47,9 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/bin
+PATH=$PATH:/usr/local/bin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/bin
+
+alias untouch='rm'
 
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
@@ -56,9 +58,11 @@ alias gut='nocorrect git'
 alias fig='nocorrect git'
 alias gph='nocorrect git push origin HEAD'
 alias gs='nocorrect git status'
+alias gc='nocorrect git commit'
 alias gca='nocorrect git commit -a'
 alias gcm='nocorrect git commit -m'
 alias gcam='nocorrect git commit -am'
+alias gcundo='nocorrect git reset --soft "HEAD^"'
 alias glog='nocorrect git log'
 alias gco='nocorrect git checkout'
 alias gcob='nocorrect git checkout -b'
@@ -67,6 +71,7 @@ alias gcom='nocorrect git checkout master'
 alias gpu='nocorrect git pull'
 alias gst='nocorrect git stash'
 alias gstp='nocorrect git stash pop'
+alias gstl='nocorrect git stash list'
 compdef _git gs=git-status
 
 # Keybindings!
