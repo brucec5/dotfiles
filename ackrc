@@ -4,3 +4,5 @@
 --ignore-dir=public
 --ignore-dir=vendor
 --ignore-file=is:tags
+--ignore-file=is:.tags
+--ignore-file=is:.tags_sorted_by_file
