@@ -21,6 +21,8 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'szw/vim-tags'
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-surround'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'tpope/vim-rvm'
 
 "change mapleader to , from \
 let mapleader=","
@@ -111,15 +113,16 @@ endif
 " Highlight the current line!
 set cursorline
 "hi CursorLine cterm=bold gui=bold guibg=bg
+hi CursorLineNR guifg=#ffcc66 ctermbg=3
 
 set wildignore+=*/tmp/*,*/vendor/*,*/log/*,*/sql/*
 
-let g:ctrlp_user_command = {
-  \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files . -co --exclude-standard'],
-    \ }
-  \ 'fallback': 'find %s -type f'
-  \ }
+"let g:ctrlp_user_command = {
+  "\ 'types': {
+    "\ 1: ['.git', 'cd %s && git ls-files . -co --exclude-standard']
+    "\ },
+  "\ 'fallback': 'find %s -type f'
+  "\ }
 
 " Override the .md file extension to be for markdown instead of modula
 au BufRead,BufNewFile *.md set filetype=markdown
@@ -150,3 +153,6 @@ let g:indent_guides_enable_on_vim_startup=1
 
 " Autosave on focus loss
 autocmd BufLeave,FocusLost * silent! wall
+
+" Handlebars completions???
+let g:mustache_abbreviations = 1
