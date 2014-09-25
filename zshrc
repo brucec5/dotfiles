@@ -51,6 +51,8 @@ PATH=$PATH:/usr/local/bin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/us
 
 alias untouch='rm'
 
+alias reload='source ~/.zshrc'
+
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
 alias got='nocorrect git'
@@ -66,6 +68,7 @@ alias gcundo='nocorrect git reset --soft "HEAD^"'
 alias glog='nocorrect git log'
 alias glogd='nocorrect git log ..develop'
 alias glogm='nocorrect git log ..master'
+alias gslog='release_notes'
 alias gco='nocorrect git checkout'
 alias gcob='nocorrect git checkout -b'
 alias gcod='nocorrect git checkout develop'
@@ -74,7 +77,20 @@ alias gpu='nocorrect git pull'
 alias gst='nocorrect git stash -u'
 alias gstp='nocorrect git stash pop'
 alias gstl='nocorrect git stash list'
+alias gssc='gss | wc -l | tr -d " "'
+alias gdd='git diff develop'
+alias gdr='git diff -R'
+alias gbm='nocorrect git branch -m'
+alias ggraph='git log --oneline --graph --decorate'
 compdef _git gs=git-status
+
+function release_branch() {
+  git flow release $*
+}
+
+function release_notes() {
+  git --no-pager shortlog --grep "pull request" $1..HEAD
+}
 
 # Keybindings!
 bindkey '[C' forward-word

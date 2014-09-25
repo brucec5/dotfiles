@@ -53,7 +53,7 @@ set expandtab
 set nobackup
 set nowritebackup
 set noswapfile
-
+set mouse=a
 
 filetype plugin indent on
 
@@ -156,3 +156,7 @@ autocmd BufLeave,FocusLost * silent! wall
 
 " Handlebars completions???
 let g:mustache_abbreviations = 1
+
+let vimpager_use_gvim = 0
+let vimpager_scrolloff = 0
+let vimpager_passthrough = 1
