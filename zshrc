@@ -80,9 +80,14 @@ alias gstl='nocorrect git stash list'
 alias gssc='gss | wc -l | tr -d " "'
 alias gdd='git diff develop'
 alias gdr='git diff -R'
+alias gdc="git_commit_diff"
 alias gbm='nocorrect git branch -m'
 alias ggraph='git log --oneline --graph --decorate'
 compdef _git gs=git-status
+
+function git_commit_diff() {
+  git diff "$1^!"
+}
 
 function release_branch() {
   git flow release $*
