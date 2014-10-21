@@ -16,13 +16,17 @@ function _rprompt_exit_status() {
   fi
 }
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" [%{%B%F{blue}%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{%f%k%b%K%{${bg[black]}%}%B%F{green}%}]"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{%B%F{green}%}[%{%B%F{blue}%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{%f%k%b%B%F{green}%}]"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{%F{red}%}*%{%f%k%b%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
+ZSH_THEME_RVM_PROMPT_OPTIONS="i v g"
+ZSH_THEME_RVM_PROMPT_PREFIX="%{%B%F{green}%}(%{%B%F{red}%}"
+ZSH_THEME_RVM_PROMPT_SUFFIX="%{%f%k%b%B%F{green}%})"
+
 PROMPT='%{%f%k%b%}
-%{%K%{${bg[black]}%}%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%K%{${bg[black]}%}%}%~%{%B%F{green}%}$(git_prompt_info)%E%{%f%k%b%}
-%{%K%{${bg[black]}%}%}$(_prompt_char)%{%K%{${bg[black]}%}%} %#%{%f%k%b%} '
+%{%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%} $(rvm_prompt_info)
+$(_prompt_char)% %#%{%f%k%b%} '
 
 RPROMPT='$(_rprompt_exit_status)'
