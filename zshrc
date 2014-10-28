@@ -49,6 +49,8 @@ source $ZSH/oh-my-zsh.sh
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/bin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/bin
 
+export PAGER=vimpager
+
 alias untouch='rm'
 
 alias reload='source ~/.zshrc'
