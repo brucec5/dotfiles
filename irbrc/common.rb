@@ -12,9 +12,16 @@ class Method
   def sublimate
     if self.respond_to? :source_location
       file, line = self.source_location
+      if file.nil? || line.nil?
+        return puts "#{self.name} is a native method!"
+      end
     elsif self.respond_to?(:__file__) && self.respond_to?(:__line__)
-      file = self.__file__
-      line = self.__line__
+      begin
+        file = self.__file__
+        line = self.__line__
+      rescue ArgumentError
+        return puts "#{self.name} is a native method!"
+      end
     else
       raise "I don't know how to find the file/line of this method definition in the current ruby."
     end
