@@ -82,9 +82,14 @@ alias gstl='nocorrect git stash list'
 alias gssc='gss | wc -l | tr -d " "'
 alias gdd='git diff develop'
 alias gdr='git diff -R'
+alias gds='git diff --staged'
+alias gdh='git diff HEAD'
 alias gdc="git_commit_diff"
 alias gbm='nocorrect git branch -m'
 alias ggraph='git log --oneline --graph --decorate'
+alias gap='git add --patch'
+alias gsl='git stash list'
+alias gsd='git stash show -p'
 compdef _git gs=git-status
 
 function git_commit_diff() {
