@@ -9,15 +9,6 @@ if ENV['RAILS_ENV']
       end
     end
 
-    # Shortcuts for finding things by symbol
-    def Fund(symbol)
-      Fund.where(:symbol => symbol.to_s).first
-    end
-
-    def Stock(symbol)
-      Stock.where(:symbol => symbol.to_s).first
-    end
-
     # Log SQL queries to stdout
     ActiveRecord::Base.connection.instance_variable_set :@logger, Logger.new(STDOUT)
 
