@@ -8,8 +8,8 @@ def pp(printee, width = 140)
 end
 
 # Works in REE and 1.9+
-class Method
-  def sublimate
+module Sublimate
+  def sublimate!
     if self.respond_to? :source_location
       file, line = self.source_location
       if file.nil? || line.nil?
@@ -28,6 +28,24 @@ class Method
     method_line = "#{file}:#{line}"
     puts method_line
     %x(subl -n #{method_line})
+  end
+end
+
+class Method
+  include Sublimate
+end
+
+class UnboundMethod
+  include Sublimate
+end
+
+class Object
+  def sublimate(method_name)
+    self.method(method_name).sublimate!
+  end
+
+  def instance_sublimate(method_name)
+    self.instance_method(method_name).sublimate!
   end
 end
 
