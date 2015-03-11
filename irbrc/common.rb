@@ -55,3 +55,9 @@ class BigDecimal
     "@(#{self.to_s})"
   end
 end
+
+class Fixnum
+  def hex
+    self.to_s(16)
+  end
+end
