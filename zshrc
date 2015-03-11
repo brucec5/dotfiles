@@ -119,3 +119,47 @@ function conflicts() {
 bindkey '[C' forward-word
 bindkey '[D' backward-word
 
+function preRelease {
+  set -x # optional, this prints the commands in the console
+  git stash
+  git checkout master
+  if [ $? -ne 0 ] ; then return; fi
+  git pull
+  if [ $? -ne 0 ] ; then return; fi
+  git checkout develop
+  git pull
+  latestTag=$(git describe origin/master)
+  echo "Changes since" $latestTag
+  git shortlog --format="%s" --grep "pull request" $latestTag..HEAD
+  set +x
+}
+
+# takes the release number as a parameter
+function release {
+  set -x
+  git flow release start ${1}
+  if [ $? -ne 0 ] ; then return; fi
+  git flow release publish ${1}
+  if [ $? -ne 0 ] ; then return; fi
+  cap staging deploy:rolling -S branch=release/${1}
+  set +x
+}
+
+# takes the release number as a parameter
+function finishRelease {
+  set -x
+  git pull
+  git flow release finish ${1}
+  if [ $? -ne 0 ] ; then return; fi
+  git pull
+  git push
+  if [ $? -ne 0 ] ; then return; fi
+  git push --tags
+  if [ $? -ne 0 ] ; then return; fi
+  git checkout master
+  if [ $? -ne 0 ] ; then return; fi
+  git push
+  if [ $? -ne 0 ] ; then return; fi
+  cap production deploy:rolling
+  set +x
+}
