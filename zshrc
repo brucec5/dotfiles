@@ -70,7 +70,7 @@ alias gcundo='nocorrect git reset --soft "HEAD^"'
 alias glog='nocorrect git log'
 alias glogd='nocorrect git log ..develop'
 alias glogm='nocorrect git log ..master'
-alias gslog='release_notes'
+alias gslog='release-notes'
 alias gco='nocorrect git checkout'
 alias gcob='nocorrect git checkout -b'
 alias gcod='nocorrect git checkout develop'
@@ -83,25 +83,36 @@ alias gssc='gss | wc -l | tr -d " "'
 alias gdd='git diff develop'
 alias gdr='git diff -R'
 alias gds='git diff --staged'
+alias gsd='gds'
 alias gdh='git diff HEAD'
-alias gdc="git_commit_diff"
+alias gdc="git-commit-diff"
 alias gbm='nocorrect git branch -m'
 alias ggraph='git log --oneline --graph --decorate'
 alias gap='git add --patch'
 alias gsl='git stash list'
-alias gsd='git stash show -p'
+alias gstd='git stash show -p'
+alias gversion='git describe origin/master'
+alias gcp='nocorrect git cherry-pick'
+alias gconflict="git ls-files -u  | cut -f 2 | sort -u | tr '\n' ' '"
 compdef _git gs=git-status
 
-function git_commit_diff() {
+function git-commit-diff() {
   git diff "$1^!"
 }
 
-function release_branch() {
+function release-branch() {
   git flow release $*
 }
 
-function release_notes() {
+function release-notes() {
   git --no-pager shortlog --grep "pull request" $1..HEAD
+}
+
+function conflicts() {
+  git_conflicts=$(gconflict)
+  if [ -n "$git_conflicts" ]; then
+    subl -n $git_conflicts
+  fi
 }
 
 # Keybindings!
