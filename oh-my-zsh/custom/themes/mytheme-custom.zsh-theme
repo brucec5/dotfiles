@@ -25,8 +25,18 @@ ZSH_THEME_RVM_PROMPT_OPTIONS="i v g"
 ZSH_THEME_RVM_PROMPT_PREFIX="%{%B%F{green}%}(%{%B%F{red}%}"
 ZSH_THEME_RVM_PROMPT_SUFFIX="%{%f%k%b%B%F{green}%})"
 
+preexec () {
+  (( $#_elapsed > 1000 )) && set -A _elapsed $_elapsed[-1000,-1]
+  typeset -ig _start=SECONDS
+}
+
+precmd () {
+  (( _start >= 0 )) && set -A _elapsed $_elapsed $(( SECONDS-_start ))
+  _start=-1
+}
+
 PROMPT='%{%f%k%b%}
-%{%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%} $(rvm_prompt_info)
+%{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) %{%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%} $(rvm_prompt_info)
 $(_prompt_char)% %#%{%f%k%b%} '
 
 RPROMPT='$(_rprompt_exit_status)'
