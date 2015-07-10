@@ -65,3 +65,14 @@ class Fixnum
     self.to_s(16)
   end
 end
+
+# My stupid git aliases that I sometimes type into irb on accident.
+# Might as well have them do something useful.
+
+def gs
+  puts `git status`
+end
+
+def gd
+  puts `git diff`
+end
