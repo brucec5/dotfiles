@@ -5,6 +5,7 @@ config windowHintsIgnoreHiddenWindows false
 config windowHintsSpread true
 config windowHintsShowIcons true
 config windowHintsDuration 10
+config windowHintsFontColor 235;235;235;1.0
 
 # shrink bindings
 bind right:cmd;ctrl   resize -50% +0 bottom-right
