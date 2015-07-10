@@ -76,11 +76,13 @@ alias gcob='nocorrect git checkout -b'
 alias gcod='nocorrect git checkout develop'
 alias gcom='nocorrect git checkout master'
 alias gpu='nocorrect git pull'
+alias gpuu='nocorrect git pull origin $(this-branch)'
 alias gst='nocorrect git stash -u'
 alias gstp='nocorrect git stash pop'
 alias gstl='nocorrect git stash list'
 alias gssc='gss | wc -l | tr -d " "'
 alias gdd='git diff develop'
+alias gddh='git diff develop HEAD'
 alias gdr='git diff -R'
 alias gds='git diff --staged'
 alias gsd='gds'
@@ -96,6 +98,18 @@ alias gcp='nocorrect git cherry-pick'
 alias gconflict="git ls-files -u  | cut -f 2 | sort -u | tr '\n' ' '"
 compdef _git gs=git-status
 
+function this-branch() {
+  git rev-parse --abbrev-ref HEAD
+}
+
+function merged-branches() {
+  git branch --merged | ggrep -Pv "..(develop|master|$(this-branch))"
+}
+
+function delete-merged-branches() {
+  merged-branches | xargs -n 1 git branch -d
+}
+
 function git-commit-diff() {
   git diff "$1^!"
 }
@@ -105,7 +119,8 @@ function release-branch() {
 }
 
 function release-notes() {
-  git --no-pager shortlog --grep "pull request" $1..HEAD
+  GVERSION=${1-`gversion`}
+  git --no-pager shortlog --grep "pull request" $GVERSION..HEAD
 }
 
 function conflicts() {
