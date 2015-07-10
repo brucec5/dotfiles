@@ -7,3 +7,4 @@
 --ignore-file=is:.tags
 --ignore-file=is:.gemtags
 --ignore-file=is:.tags_sorted_by_file
+--ignore=*.pdf
