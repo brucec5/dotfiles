@@ -41,7 +41,11 @@ end
 
 class Object
   def sublimate(method_name)
-    self.method(method_name).sublimate!
+    # self.method(method_name).sublimate!
+    # Some assholes override `method` so the above doesn't work.
+    # Mostly HTTP clients seem to do this.
+    # I doubt they would override instance_method, though.
+    self.class.instance_sublimate method_name
   end
 
   def instance_sublimate(method_name)
