@@ -178,3 +178,7 @@ function finishRelease {
   cap production deploy:rolling
   set +x
 }
+
+function mac2unix {
+  cat $1 | tr '\r' '\n'
+}
