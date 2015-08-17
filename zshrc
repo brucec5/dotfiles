@@ -114,70 +114,14 @@ function git-commit-diff() {
   git diff "$1^!"
 }
 
-function release-branch() {
-  git flow release $*
-}
-
 function release-notes() {
   GVERSION=${1-`gversion`}
   git --no-pager shortlog --grep "pull request" $GVERSION..HEAD
 }
 
-function conflicts() {
-  git_conflicts=$(gconflict)
-  if [ -n "$git_conflicts" ]; then
-    subl -n $git_conflicts
-  fi
-}
-
 # Keybindings!
 bindkey '[C' forward-word
 bindkey '[D' backward-word
-
-function preRelease {
-  set -x # optional, this prints the commands in the console
-  git stash
-  git checkout master
-  if [ $? -ne 0 ] ; then return; fi
-  git pull
-  if [ $? -ne 0 ] ; then return; fi
-  git checkout develop
-  git pull
-  latestTag=$(git describe origin/master)
-  echo "Changes since" $latestTag
-  git shortlog --format="%s" --grep "pull request" $latestTag..HEAD
-  set +x
-}
-
-# takes the release number as a parameter
-function release {
-  set -x
-  git flow release start ${1}
-  if [ $? -ne 0 ] ; then return; fi
-  git flow release publish ${1}
-  if [ $? -ne 0 ] ; then return; fi
-  cap staging deploy:rolling -S branch=release/${1}
-  set +x
-}
-
-# takes the release number as a parameter
-function finishRelease {
-  set -x
-  git pull
-  git flow release finish ${1}
-  if [ $? -ne 0 ] ; then return; fi
-  git pull
-  git push
-  if [ $? -ne 0 ] ; then return; fi
-  git push --tags
-  if [ $? -ne 0 ] ; then return; fi
-  git checkout master
-  if [ $? -ne 0 ] ; then return; fi
-  git push
-  if [ $? -ne 0 ] ; then return; fi
-  cap production deploy:rolling
-  set +x
-}
 
 function mac2unix {
   cat $1 | tr '\r' '\n'
