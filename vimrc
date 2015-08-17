@@ -57,9 +57,6 @@ set mouse=a
 
 filetype plugin indent on
 
-" Map ; to : for easier commands
-nnoremap ; :
-
 " Map C-s to a nop???
 nnoremap <silent> <C-S> <NOP>
 
