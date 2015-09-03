@@ -40,12 +40,14 @@ class UnboundMethod
 end
 
 class Object
+  # Some assholes override the `method` method.
+  # Mostly HTTP clients seem to do this.
+  # We really want to use the REAL method method,
+  # so we'll make an alias of it here (note the 3 underscores)
+  alias :___method___ :method
+
   def sublimate(method_name)
-    # self.method(method_name).sublimate!
-    # Some assholes override `method` so the above doesn't work.
-    # Mostly HTTP clients seem to do this.
-    # I doubt they would override instance_method, though.
-    self.class.instance_sublimate method_name
+    self.___method___(method_name).sublimate!
   end
 
   def instance_sublimate(method_name)
