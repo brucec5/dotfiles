@@ -47,6 +47,7 @@ bind esc:cmd;ctrl;alt;shift relaunch
 bind f7:cmd shell "/usr/local/bin/mpc prev"
 bind f8:cmd shell "/usr/local/bin/mpc toggle"
 bind f9:cmd shell "/usr/local/bin/mpc next"
+bind f8:cmd;shift shell "/Users/chris/bin/mpdnotify"
 
 bind s:cmd;ctrl focus "Slack"
 bind /:cmd;ctrl focus "Slack"
