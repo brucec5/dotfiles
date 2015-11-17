@@ -32,28 +32,31 @@ nmap <silent> <leader>ev :e ~/.vimrc<CR>
 nmap <silent> <leader>sv :so ~/.vimrc<CR>
 
 syntax on
+set autoindent
+set backspace=indent,eol,start
+set copyindent
+set confirm
+set expandtab
 set hidden
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set mouse=a
+set nobackup
+set nomodeline
+set noswapfile
+set nowritebackup
 set number
 set ruler
-set tabstop=2
-set backspace=indent,eol,start
-set autoindent
-set copyindent
-set shiftwidth=2
 set shiftround
+set shiftwidth=2
 set showmatch
-set ignorecase
 set smartcase
-set smarttab
-set hlsearch
-set incsearch
 set smartindent
-set autoindent
-set expandtab
-set nobackup
-set nowritebackup
-set noswapfile
-set mouse=a
+set smarttab
+set tabstop=2
+set wildmenu
 
 filetype plugin indent on
 
