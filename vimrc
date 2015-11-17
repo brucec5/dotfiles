@@ -60,6 +60,9 @@ set wildmenu
 
 filetype plugin indent on
 
+imap <silent> jk <Esc>
+imap <silent> kj <Esc>
+
 " Map C-s to a nop???
 nnoremap <silent> <C-S> <NOP>
 
