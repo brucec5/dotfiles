@@ -25,6 +25,16 @@ if ENV['RAILS_ENV']
     def load_session(session_data)
       Marshal.load(Base64.decode64(session_data.split('--').first))
     end
+
+    # Override reload! to reenable activerecord logging for when it doesn't exist
+    # TODO: figure out a better way to override reload! than copy/pasting it
+    def reload!(print = true)
+      puts "Reloading..." if print
+      Dispatcher.cleanup_application
+      Dispatcher.reload_application
+      enable_active_record_logging!
+      true
+    end
   end
 elsif defined?(Rails) && !Rails.env.nil?
   class ActiveRecord::Base
