@@ -50,6 +50,7 @@ source $ZSH/oh-my-zsh.sh
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/bin
 
 export PAGER=vimpager
+export EDITOR=vim
 
 alias untouch='rm'
 
