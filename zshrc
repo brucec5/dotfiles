@@ -48,7 +48,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin
 
 export PAGER=vimpager
 export EDITOR=vim
@@ -121,10 +121,12 @@ function release-notes() {
   git --no-pager shortlog --grep "pull request" $GVERSION..HEAD
 }
 
-# Keybindings!
-bindkey '[C' forward-word
-bindkey '[D' backward-word
-
 function mac2unix {
   cat $1 | tr '\r' '\n'
 }
+
+# Keybindings!
+if [ $(uname) != "Linux" ]; then
+  bindkey '[C' forward-word
+  bindkey '[D' backward-word
+fi
