@@ -2,27 +2,30 @@ set nocompatible
 
 " For Vundle
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'kien/ctrlp.vim'
-Bundle 'henrik/vim-indexed-search.git'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'kchmck/vim-coffee-script.git'
-Bundle 'tpope/vim-endwise.git'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rails'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'godlygeek/tabular'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'chriskempson/base16-vim'
-Bundle 'szw/vim-tags'
-Bundle 'mileszs/ack.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'mustache/vim-mustache-handlebars'
-Bundle 'tpope/vim-rvm'
+Plugin 'kien/ctrlp.vim'
+Plugin 'henrik/vim-indexed-search.git'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'kchmck/vim-coffee-script.git'
+Plugin 'tpope/vim-endwise.git'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-rails'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'godlygeek/tabular'
+"Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'chriskempson/base16-vim'
+Plugin 'szw/vim-tags'
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'tpope/vim-rvm'
+
+call vundle#end()
+filetype plugin indent on
 
 "change mapleader to , from \
 let mapleader=","
@@ -57,8 +60,6 @@ set smartindent
 set smarttab
 set tabstop=2
 set wildmenu
-
-filetype plugin indent on
 
 imap <silent> jk <Esc>
 imap <silent> kj <Esc>
@@ -107,7 +108,7 @@ nnoremap <silent> <leader>l
 " Colorscheme, duh. But load different ones on linux and mac.
 let s:uname = system("echo -n \"$(uname)\"")
 if s:uname == "Linux"
-  colorscheme xcolors
+  colorscheme desert
 else
   set background=dark
   colorscheme base16-eighties
