@@ -16,7 +16,6 @@ Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'godlygeek/tabular'
-"Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'chriskempson/base16-vim'
 Plugin 'szw/vim-tags'
 Plugin 'mileszs/ack.vim'
@@ -152,14 +151,8 @@ map <C-Down> <C-w><Down>
 map <C-Right> <C-w><Right>
 map <C-Left> <C-w><Left>
 
-" Turn on indent guides at start?
-let g:indent_guides_enable_on_vim_startup=1
-
 " Autosave on focus loss
 autocmd BufLeave,FocusLost * silent! wall
-
-" Handlebars completions???
-let g:mustache_abbreviations = 1
 
 let vimpager_use_gvim = 0
 let vimpager_scrolloff = 0
