@@ -62,6 +62,8 @@ alias untouch='rm'
 
 alias reload='source ~/.zshrc'
 
+alias cdfinder="cd \"\$(osascript -e 'tell app \"Finder\" to POSIX path of (insertion location as alias)')\""
+
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
 alias got='nocorrect git'
@@ -82,6 +84,7 @@ alias gco='nocorrect git checkout'
 alias gcob='nocorrect git checkout -b'
 alias gcod='nocorrect git checkout develop'
 alias gcom='nocorrect git checkout master'
+alias gcop='nocorrect git checkout -p'
 alias gpu='nocorrect git pull'
 alias gpuu='nocorrect git pull origin $(this-branch)'
 alias gst='nocorrect git stash -u'
@@ -103,6 +106,8 @@ alias gstd='git stash show -p'
 alias gversion='git describe origin/master'
 alias gcp='nocorrect git cherry-pick'
 alias gconflict="git ls-files -u  | cut -f 2 | sort -u | tr '\n' ' '"
+alias gus="nocorrect git unstage"
+alias gusp="git unstage -p"
 compdef _git gs=git-status
 
 function this-branch() {
@@ -123,11 +128,30 @@ function git-commit-diff() {
 
 function release-notes() {
   GVERSION=${1-`gversion`}
-  git --no-pager shortlog --grep "pull request" $GVERSION..HEAD
+  git --no-pager shortlog --first-parent --format="[%h] %s" $GVERSION..HEAD
+  echo "==== OLD VERSION FOR POSTERITY ====\n"
+  git shortlog --format="[%h] %s" --grep "pull request" $GVERSION..HEAD
 }
 
 function mac2unix {
   cat $1 | tr '\r' '\n'
+}
+
+# Switch between partner apps
+function switch-partner() {
+  printf "Switching partner from $(sed -e 's/app: //' config/partner.yml) to $1..."
+  echo "app: $1" > config/partner.yml;
+  rake assets:clobber 2> /dev/null;
+        rm -rf tmp/cache/assets/development/sass;
+        rm -rf tmp/cache/assets/development/sprockets;
+        rm -rf tmp/cache/sprockets;
+  powder restart;
+  echo "Done."
+}
+
+function logtail() {
+  # TODO: make the syntax highlighting more general? currently only highlights HTTP status codes (or similar looking things)
+  tail -f $* | perl -pe 's/ [0-9]{3} [A-Za-z\s]+/\e[1;34m$&\e[0m/g'
 }
 
 # Keybindings!
