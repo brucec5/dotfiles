@@ -51,7 +51,12 @@ source $ZSH/oh-my-zsh.sh
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin
 
 export PAGER=vimpager
-export EDITOR=vim
+if [ $(uname) != "Linux" ]; then
+  export EDITOR=subl
+else
+  export EDITOR=vim
+fi
+export GIT_EDITOR=vim
 
 alias untouch='rm'
 
