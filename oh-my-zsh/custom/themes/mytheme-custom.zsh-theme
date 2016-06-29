@@ -10,9 +10,9 @@ function _rprompt_exit_status() {
   _EXIT_STATUS=$?
 
   if (( $_EXIT_STATUS == 0 )); then
-    echo "%{%F{cyan}%}$_EXIT_STATUS%{%f%k%b%}"
+    echo "%{%F{cyan}%}<$_EXIT_STATUS>%{%f%k%b%}"
   else
-  	echo "%{%F{red}%}$_EXIT_STATUS%{%f%k%b%}"
+    echo "%{%F{red}%}<$_EXIT_STATUS>%{%f%k%b%}"
   fi
 }
 
@@ -36,7 +36,5 @@ precmd () {
 }
 
 PROMPT='%{%f%k%b%}
-%{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) %{%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%} $(rvm_prompt_info)
+%{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_rprompt_exit_status) %{%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%} $(rvm_prompt_info)
 $(_prompt_char)% %#%{%f%k%b%} '
-
-RPROMPT='$(_rprompt_exit_status)'
