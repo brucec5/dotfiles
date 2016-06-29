@@ -23,7 +23,7 @@ if ENV['RAILS_ENV']
 
     # For marshalling session data
     def load_session(session_data)
-      Marshal.load(Base64.decode64(session_data.split('--').first))
+      Marshal.load(Base64.decode64(URI.decode(session_data.split('--').first)))
     end
 
     # Override reload! to reenable activerecord logging for when it doesn't exist
