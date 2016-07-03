@@ -50,9 +50,10 @@ source $ZSH/oh-my-zsh.sh
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin
 
-export PAGER=vimpager
 if [ $(uname) != "Linux" ]; then
   export EDITOR=subl
+  # Fix vimpager on linux
+  export PAGER=vimpager
 else
   export EDITOR=vim
 fi
