@@ -51,9 +51,8 @@ source $ZSH/oh-my-zsh.sh
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin
 
 if [ $(uname) != "Linux" ]; then
-  export EDITOR=subl
-  # Fix vimpager on linux
-  export PAGER=vimpager
+  export EDITOR=atom
+  export PAGER=most
 else
   export EDITOR=vim
 fi
