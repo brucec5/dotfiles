@@ -52,7 +52,6 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/
 
 if [ $(uname) != "Linux" ]; then
   export EDITOR=atom
-  export PAGER=most
 else
   export EDITOR=vim
 fi
@@ -65,6 +64,7 @@ alias reload='source ~/.zshrc'
 alias cdfinder="cd \"\$(osascript -e 'tell app \"Finder\" to POSIX path of (insertion location as alias)')\""
 
 alias less=most
+export PAGER=most
 
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
