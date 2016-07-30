@@ -48,7 +48,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/Users/chris/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin
 
 if [ $(uname) != "Linux" ]; then
   export EDITOR=atom
