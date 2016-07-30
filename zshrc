@@ -161,3 +161,6 @@ if [ $(uname) != "Linux" ]; then
   bindkey '[C' forward-word
   bindkey '[D' backward-word
 fi
+
+export NVM_DIR="${HOME}/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
