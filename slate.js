@@ -43,12 +43,12 @@ slate.bindAll({
   "f7:cmd":       shell("/usr/local/bin/mpc prev"),
   "f8:cmd":       shell("/usr/local/bin/mpc toggle"),
   "f9:cmd":       shell("/usr/local/bin/mpc next"),
-  "f8:cmd;shift": shell("/Users/chris/bin/mpdnotify"),
+  "f8:cmd;shift": shell("/Users/chris.bruce/bin/mpdnotify.sh"),
 
   "/:cmd;ctrl": focusApp('Slack'),
   "s:cmd;ctrl": focusApp('Slack'),
 
-  "l:cmd;ctrl": shell('/Users/chris/bin/lockscreen'),
+  "l:cmd;ctrl": shell('/Users/chris.bruce/bin/lockscreen'),
 });
 
 // Bind all of the throw bindings that I will ever need
