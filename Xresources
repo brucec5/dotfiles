@@ -1,67 +1,45 @@
-! --- ~/.Xresources ------------------------------------------------------------
-! ------------------------------------------------------------------------------
-! --- generated with 4bit Terminal Color Scheme Designer -----------------------
-! ------------------------------------------------------------------------------
-! --- http://ciembor.github.com/4bit -------------------------------------------
-! ------------------------------------------------------------------------------
+#include "dotfiles/xrdb/Seti.xrdb"
 
-! --- special colors ---
+*color0:      Ansi_0_Color
+*color1:      Ansi_1_Color
+*color2:      Ansi_2_Color
+*color3:      Ansi_3_Color
+*color4:      Ansi_4_Color
+*color5:      Ansi_5_Color
+*color6:      Ansi_6_Color
+*color7:      Ansi_7_Color
+*color8:      Ansi_8_Color
+*color9:      Ansi_9_Color
+*color10:     Ansi_10_Color
+*color11:     Ansi_11_Color
+*color12:     Ansi_12_Color
+*color13:     Ansi_13_Color
+*color14:     Ansi_14_Color
+*color15:     Ansi_15_Color
+*colorBD:     Bold_Color
+!*colorIT:     Italic_Color
+!*colorUL:     Underline_Color
+*foreground:  Foreground_Color
+*background:  Background_Color
+*cursorColor: Cursor_Color
 
-*background: #0d1926
-*foreground: #d9e6f2
+! do not scroll with output
+URxvt*scrollTtyOutput: false
 
-! --- standard colors ---
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
 
-! black
-*color0: #000000
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
 
-! bright_black
-*color8: #262626
+URxvt*secondaryScreen: 1
+URxvt*secondaryScroll: 0
 
-! red
-*color1: #ca5f5f
+URxvt*urlLauncher: chromium
 
-! bright_red
-*color9: #e6b3b3
+URxvt*scrollBar: false
 
-! green
-*color2: #5fca5f
+URxvt*urgentOnBell: true
 
-! bright_green
-*color10: #b3e6b3
-
-! yellow
-*color3: #caca5f
-
-! bright_yellow
-*color11: #e6e6b3
-
-! blue
-*color4: #5f5fca
-
-! bright_blue
-*color12: #b3b3e6
-
-! magenta
-*color5: #ca5fca
-
-! bright_magenta
-*color13: #e6b3e6
-
-! cyan
-*color6: #5fcaca
-
-! bright_cyan
-*color14: #b3e6e6
-
-! white
-*color7: #d9d9d9
-
-! bright_white
-*color15: #ffffff
-
-
-! ------------------------------------------------------------------------------
-! --- end of terminal colors section -------------------------------------------
-! ------------------------------------------------------------------------------
-
+URxvt*keysym*Control-Left: \033[1;5D
+URxvt*keysym*Control-Right: \033[1;5C
