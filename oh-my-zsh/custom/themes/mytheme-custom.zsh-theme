@@ -33,6 +33,11 @@ preexec () {
 precmd () {
   (( _start >= 0 )) && set -A _elapsed $_elapsed $(( SECONDS-_start ))
   _start=-1
+
+  # Echo a bell to cause awesome to flag the terminal emulator as urgent
+  if [ $(uname) = "Linux" ]; then
+    echo -ne "\a"
+  fi
 }
 
 PROMPT='%{%f%k%b%}
