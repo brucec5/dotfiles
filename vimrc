@@ -112,7 +112,9 @@ set cursorline
 "hi CursorLine cterm=bold gui=bold guibg=bg
 hi CursorLineNR guifg=#ffcc66 ctermbg=3
 
-set wildignore+=*/tmp/*,*/vendor/*,*/log/*,*/sql/*
+if !exists("vimpager")
+  set wildignore+=*/tmp/*,*/vendor/*,*/log/*,*/sql/*,*/node_modules/*
+endif
 
 "let g:ctrlp_user_command = {
   "\ 'types': {

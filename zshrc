@@ -63,8 +63,8 @@ alias reload='source ~/.zshrc'
 
 alias cdfinder="cd \"\$(osascript -e 'tell app \"Finder\" to POSIX path of (insertion location as alias)')\""
 
-alias less=most
-export PAGER=most
+alias less=vimpager
+export PAGER=vimpager
 
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
