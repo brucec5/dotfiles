@@ -132,7 +132,7 @@ function release-notes() {
   GVERSION=${1-`gversion`}
   git --no-pager shortlog --first-parent --format="[%h] %s" $GVERSION..HEAD
   echo "==== OLD VERSION FOR POSTERITY ====\n"
-  git shortlog --format="[%h] %s" --grep "pull request" $GVERSION..HEAD
+  git --no-pager shortlog --format="[%h] %s" --grep "pull request" $GVERSION..HEAD
 }
 
 function mac2unix {

@@ -82,7 +82,7 @@ nmap <F1> <Esc>
 imap <F1> <Esc>
 
 " Display trailing whitespace as an error
-match ErrorMsg /\s\+$/
+"match ErrorMsg /\s\+$/
 
 " If a #! is detected, set executable bit on writing.
 function! SetExecutableIfScript(line1, current_file)
@@ -95,14 +95,14 @@ autocmd BufWritePost * call SetExecutableIfScript(getline(1), expand("%:p"))
 
 " leader l to highlight long lines (length set by textwidth)
 nnoremap <silent> <leader>l
-			\ :if exists('w:long_line_match') <Bar>
-			\ 	silent! call matchdelete(w:long_line_match) <Bar>
-			\		unlet w:long_line_match <Bar>
-			\	elseif &textwidth > 0 <Bar>
-			\		let w:long_line_match = matchadd('ErrorMsg', '\%>' . &tw . 'v.\+', -1) <Bar>
-			\	else <Bar>
-			\		let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
-			\	endif<CR>
+      \ :if exists('w:long_line_match') <Bar>
+      \ 	silent! call matchdelete(w:long_line_match) <Bar>
+      \		unlet w:long_line_match <Bar>
+      \	elseif &textwidth > 0 <Bar>
+      \		let w:long_line_match = matchadd('ErrorMsg', '\%>' . &tw . 'v.\+', -1) <Bar>
+      \	else <Bar>
+      \		let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
+      \	endif<CR>
 
 set background=dark
 colorscheme desert
