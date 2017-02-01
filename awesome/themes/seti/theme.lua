@@ -3,8 +3,7 @@ theme = {}
 -- }}}
 
 -- {{{ Styles
-theme.font      = "clean 10"
-theme.xfld_font = '-*-clean-medium-r-*-*-15-*-*-*-*-*-*-*'
+theme.font = "Schumacher Clean 8"
 theme.tasklist_disable_icon = true
 
 -- {{{ Colors
@@ -23,7 +22,7 @@ theme.bg_systray = theme.bg_normal
 
 -- {{{ Borders
 theme.border_width  = 1
-theme.border_normal = "#111213"
+theme.border_normal = "#303233"
 theme.border_focus  = "#43a5d5"
 theme.border_marked = "#c22832"
 -- }}}

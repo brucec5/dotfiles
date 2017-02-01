@@ -145,7 +145,7 @@ mpdwidget = lain.widgets.mpd({
     if mpd_now.track ~= "N/A" then
       formatted_output = mpd_now.track .. ' - ' .. formatted_output
     end
-    widget:set_markup(markup.fg.color(beautiful.fg_accent, formatted_output))
+    widget:set_markup(markup.fg.color(beautiful.fg_accent, ' ' .. formatted_output))
   end,
   music_dir = "/mnt/shared/Music"
 })
@@ -273,7 +273,6 @@ for s = 1, screen.count() do
 
   -- Widgets that are aligned to the right
   local right_layout = wibox.layout.fixed.horizontal()
-  if s == 1 then right_layout:add(wibox.widget.systray()) end
   right_layout:add(mpdwidget)
   right_layout:add(separator)
   right_layout:add(netwidget)
@@ -287,6 +286,10 @@ for s = 1, screen.count() do
   right_layout:add(memwidget)
   right_layout:add(separator)
   right_layout:add(redshiftwidget)
+  if s == 1 then
+    right_layout:add(separator)
+    right_layout:add(wibox.widget.systray())
+  end
   right_layout:add(mytextclock)
   right_layout:add(mylayoutbox[s])
 
@@ -375,8 +378,22 @@ globalkeys = awful.util.table.join(
   ),
 
   -- Menubar
-  awful.key({ modkey }, "p", function() menubar.show() end),
-  awful.key({ modkey }, "d", function() awful.util.spawn(dmenu_cmd) end)
+  awful.key({ modkey }, "p", function() awful.util.spawn('rofi -show drun') end),
+  awful.key({ modkey }, "d", function() awful.util.spawn('rofi -show run') end),
+  awful.key({ modkey }, "w", function() awful.util.spawn('rofi -show window') end),
+
+  -- Media keys
+  awful.key({ modkey }, "F10", function() awful.util.spawn('/usr/bin/amixer -q set Master toggle') end),
+  awful.key({ modkey }, "F11", function() awful.util.spawn('/usr/bin/amixer -q sset Master 9%- unmute') end),
+  awful.key({ modkey }, "F12", function() awful.util.spawn('/usr/bin/amixer -q sset Master 9%+ unmute') end),
+
+  awful.key({ modkey, "Shift" }, "F11", function() awful.util.spawn('/usr/bin/amixer -q sset Master 3%- unmute') end),
+  awful.key({ modkey, "Shift" }, "F12", function() awful.util.spawn('/usr/bin/amixer -q sset Master 3%+ unmute') end),
+
+  awful.key({ modkey }, "F6", function() awful.util.spawn('/usr/bin/mpc stop') end),
+  awful.key({ modkey }, "F7", function() awful.util.spawn('/usr/bin/mpc prev') end),
+  awful.key({ modkey }, "F8", function() awful.util.spawn('/usr/bin/mpc toggle') end),
+  awful.key({ modkey }, "F9", function() awful.util.spawn('/usr/bin/mpc next') end)
 )
 
 clientkeys = awful.util.table.join(
