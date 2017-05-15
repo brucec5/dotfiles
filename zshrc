@@ -114,6 +114,8 @@ alias gus="nocorrect git unstage"
 alias gusp="git unstage -p"
 compdef _git gs=git-status
 
+alias cspec="script/spec -c -f n"
+
 function this-branch() {
   git rev-parse --abbrev-ref HEAD
 }
