@@ -10,4 +10,4 @@ dir="${MUSIC_DIR}/$(dirname ${file})"
 cover="$(find "${dir}" -maxdepth 1 -type f | egrep -i -m1 "${IMG_REG}")"
 
 # TODO: see if extracting cover art from MP3 files is woth it?
-terminal-notifier -title "${title}" -message "${artist}" -sender com.apple.Itunes -contentImage "${cover}"
+/usr/local/bin/terminal-notifier -title "${title}" -message "${artist}" -sender com.apple.Itunes -contentImage "${cover}"
