@@ -1,3 +1,7 @@
+-- Set to true if weird window movement/resizing issues are encountered
+-- Will make window movement/resizing a bit less snappy.
+hs.window.setFrameCorrectness = false
+
 local mash = {
   grow = {"alt", "ctrl", "cmd"},
   snap = {"alt", "ctrl"},
