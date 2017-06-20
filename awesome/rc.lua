@@ -138,7 +138,7 @@ mytextclock = wibox.widget.textclock()
 
 separator = wibox.widget.textbox(' | ')
 
-cpuwidget = lain.widgets.cpu({
+cpuwidget = lain.widget.cpu({
   settings = function()
     cpu_perc1 = colorify_range(string.format("%2d%%", cpu_now[1].usage))
     cpu_perc2 = colorify_range(string.format("%2d%%", cpu_now[2].usage))
@@ -148,13 +148,13 @@ cpuwidget = lain.widgets.cpu({
   end
 })
 
-memwidget = lain.widgets.mem({
+memwidget = lain.widget.mem({
   settings = function()
     widget:set_markup("MEM " .. colorify_range(mem_now.perc .. "%"))
   end
 })
 
-mpdwidget = lain.widgets.mpd({
+mpdwidget = lain.widget.mpd({
   settings = function()
     formatted_output = mpd_now.artist .. ' - ' .. mpd_now.title
     if mpd_now.track ~= "N/A" then
@@ -165,7 +165,7 @@ mpdwidget = lain.widgets.mpd({
   music_dir = "/mnt/shared/Music"
 })
 
-alsawidget = lain.widgets.alsa({
+alsawidget = lain.widget.alsa({
   settings = function()
     if volume_now.status == "on" then
       widget:set_markup("ALSA " .. colorify_range(volume_now.level .. "%"))
@@ -176,14 +176,14 @@ alsawidget = lain.widgets.alsa({
   cmd = 'amixer -M'
 })
 
-thermwidget = lain.widgets.temp({
+thermwidget = lain.widget.temp({
   settings = function()
     widget:set_markup("THERM " .. colorify_range(coretemp_now, 43, 48))
   end,
   tempfile = "/sys/class/thermal/thermal_zone2/temp"
 })
 
-netwidget = lain.widgets.net({
+netwidget = lain.widget.net({
   settings = function()
     widget:set_markup(
       string.format(
@@ -196,7 +196,7 @@ netwidget = lain.widgets.net({
 })
 
 redshiftwidget = wibox.widget.textbox("RS")
-lain.widgets.contrib.redshift:attach(
+lain.widget.contrib.redshift:attach(
   redshiftwidget,
   function(active)
     if active then
