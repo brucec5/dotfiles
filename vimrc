@@ -7,21 +7,21 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'kien/ctrlp.vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'godlygeek/tabular'
 Plugin 'henrik/vim-indexed-search.git'
-Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'kchmck/vim-coffee-script.git'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'szw/vim-tags'
 Plugin 'tpope/vim-endwise.git'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'godlygeek/tabular'
-Plugin 'chriskempson/base16-vim'
-Plugin 'szw/vim-tags'
-Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'tpope/vim-rvm'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()
 filetype plugin indent on
