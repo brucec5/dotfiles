@@ -52,8 +52,13 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin:$HOME/.rvm/bin:/usr/local/bin:/usr/bin
 
 if [ $(uname) != "Linux" ]; then
   export EDITOR=atom
+  # Use most on mac since vimpager seems to have issues (at least on my machine)
+  alias less=most
+  export PAGER=most
 else
   export EDITOR=vim
+  alias less=vimpager
+  export PAGER=vimpager
 fi
 export GIT_EDITOR=vim
 
@@ -62,9 +67,6 @@ alias untouch='rm'
 alias reload='source ~/.zshrc'
 
 alias cdfinder="cd \"\$(osascript -e 'tell app \"Finder\" to POSIX path of (insertion location as alias)')\""
-
-alias less=vimpager
-export PAGER=vimpager
 
 alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
@@ -111,6 +113,8 @@ alias gconflict="git ls-files -u  | cut -f 2 | sort -u | tr '\n' ' '"
 alias gus="nocorrect git unstage"
 alias gusp="git unstage -p"
 compdef _git gs=git-status
+
+alias cspec="script/spec -c -f n"
 
 function this-branch() {
   git rev-parse --abbrev-ref HEAD
@@ -163,4 +167,8 @@ if [ $(uname) != "Linux" ]; then
 fi
 
 export NVM_DIR="${HOME}/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+
+if [[ -a "${HOME}/.local-zshrc" ]]; then
+  source "${HOME}/.local-zshrc"
+fi
