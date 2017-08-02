@@ -133,6 +133,9 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+monthcalendar = awful.widget.calendar_popup.month()
+monthcalendar:attach(mytextclock, 'tr')
+
 separator = wibox.widget.textbox(' | ')
 
 cpuwidget = lain.widget.cpu({
