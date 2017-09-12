@@ -1,3 +1,11 @@
+PROFILE_STARTUP=false
+if [[ "$PROFILE_STARTUP" == true ]]; then
+  # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+  PS4=$'%D{%M%S%.} %N:%i> '
+  exec 3>&2 2>$HOME/tmp/startlog.$$
+  setopt xtrace prompt_subst
+fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM=$HOME/dotfiles/oh-my-zsh/custom
@@ -155,6 +163,11 @@ function switch-partner() {
   echo "Done."
 }
 
+# Usage: lazy-source executable-to-load-on path-to-source
+function lazy-source() {
+  eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
+}
+
 function logtail() {
   # TODO: make the syntax highlighting more general? currently only highlights HTTP status codes (or similar looking things)
   tail -f $* | perl -pe 's/ [0-9]{3} [A-Za-z\s]+/\e[1;34m$&\e[0m/g'
@@ -166,9 +179,11 @@ if [ $(uname) != "Linux" ]; then
   bindkey '[D' backward-word
 fi
 
-export NVM_DIR="${HOME}/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
-
 if [[ -a "${HOME}/.local-zshrc" ]]; then
   source "${HOME}/.local-zshrc"
+fi
+
+if [[ "$PROFILE_STARTUP" == true ]]; then
+  unsetopt xtrace
+  exec 2>&3 3>&-
 fi
