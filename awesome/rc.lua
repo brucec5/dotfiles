@@ -758,6 +758,12 @@ awful.rules.rules = {
       titlebars_enabled = false
     }
   },
+  {
+    rule = { instance = "urxvt" },
+    properties = {
+      size_hints_honor = false
+    }
+  },
 }
 -- }}}
 
