@@ -23,6 +23,15 @@
 *background:  Background_Color
 *cursorColor: Cursor_Color
 
+
+! Rofi configuration
+! State:           bg       fg       bgalt    hlbg     hlfg
+rofi.color-normal: Background_Color, Foreground_Color, Background_Color_Alt, Background_Color, Ansi_4_Color
+rofi.color-urgent: Background_Color, Ansi_1_Color, Background_Color_Alt, Background_Color, Ansi_1_Color
+rofi.color-active: Background_Color, Ansi_2_Color, Background_Color_Alt, Background_Color, Ansi_2_Color
+
+rofi.color-window: Background_Color, Selection_Color, Selection_Color
+
 ! do not scroll with output
 URxvt*scrollTtyOutput: false
 
