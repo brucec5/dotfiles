@@ -27,7 +27,7 @@ module Sublimate
     end
     method_line = "#{file}:#{line}"
     puts method_line
-    %x(atom #{method_line})
+    %x(subl #{method_line})
   end
 end
 

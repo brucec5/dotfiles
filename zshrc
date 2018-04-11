@@ -59,7 +59,7 @@ source $ZSH/oh-my-zsh.sh
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:$HOME/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin
 
 if [ $(uname) != "Linux" ]; then
-  export EDITOR=atom
+  export EDITOR=subl
   # Use most on mac since vimpager seems to have issues (at least on my machine)
   alias less=most
   export PAGER=most
