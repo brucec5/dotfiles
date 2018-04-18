@@ -1,5 +1,7 @@
-for screenIndex = 1, 9 do
-  hs.hotkey.bind({"ctrl", "alt"}, tostring(screenIndex), function()
+local mapping = { 2, 1, 3 }
+
+for i, screenIndex in ipairs(mapping) do
+  hs.hotkey.bind({"ctrl", "alt"}, tostring(i), function()
     local win = hs.window.focusedWindow()
     local screen = hs.screen.allScreens()[screenIndex]
 
@@ -10,6 +12,6 @@ end
 
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "s", function()
   for i, screen in ipairs(hs.screen.allScreens()) do
-    hs.alert("Screen " .. i, {}, screen)
+    hs.alert("Screen " .. mapping[i], {}, screen)
   end
 end)

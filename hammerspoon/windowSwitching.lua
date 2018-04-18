@@ -32,7 +32,7 @@ hs.hotkey.bind(
 )
 
 -- Hints
-hs.hints.showTitleThresh = 6
+hs.hints.showTitleThresh = 10
 hs.hints.style = "vimperator"
 
 hs.hotkey.bind({"cmd"}, "escape", function()
