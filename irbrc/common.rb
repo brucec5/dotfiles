@@ -55,10 +55,10 @@ class Object
   end
 end
 
-# Nicer to read BigDecimal inspects (sort of objective-c-ish)
+# Nicer to read BigDecimal inspects (sort of objective-c-ish, but with the precisions as well)
 class BigDecimal
   def inspect
-    "@(#{self.to_s})"
+    "@(#{to_s}:#{precs.join(',')})"
   end
 end
 
@@ -78,3 +78,4 @@ end
 def gd
   puts `git diff`
 end
+IRB.conf[:SAVE_HISTORY] = 10000
