@@ -11,7 +11,7 @@ hs.hotkey.bind({"cmd", "ctrl"}, "/", function()
 end)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "l", function()
-  hs.execute("/Users/chris.bruce/bin/lockscreen")
+  hs.execute(os.getenv("HOME") .. "/bin/lockscreen")
 end)
 
 -- Application Switcher
