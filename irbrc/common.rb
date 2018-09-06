@@ -62,12 +62,6 @@ class BigDecimal
   end
 end
 
-class Fixnum
-  def hex
-    self.to_s(16)
-  end
-end
-
 # My stupid git aliases that I sometimes type into irb on accident.
 # Might as well have them do something useful.
 
