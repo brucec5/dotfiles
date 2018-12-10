@@ -11,10 +11,10 @@ hs.hotkey.bind({"cmd"}, "f9", function()
 end)
 
 hs.hotkey.bind({"cmd", "shift"}, "f8", function()
-  hs.execute("/Users/chris.bruce/dotfiles/bin/mpdnotify-mac", true)
+  hs.execute(os.getenv("HOME") ..  "/dotfiles/bin/mpdnotify-mac", true)
 end)
 
 hs.hotkey.bind({"cmd", "ctrl", "alt"}, "p", function()
   -- TODO: do this with the hammerspoon choose plugin, which should speed things up
-  hs.execute("/Users/chris.bruce/bin/mpc-choose", true)
+  hs.execute(os.getenv("HOME") ..  "/bin/mpc-choose", true)
 end)
