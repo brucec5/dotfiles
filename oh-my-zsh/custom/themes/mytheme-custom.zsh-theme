@@ -41,5 +41,5 @@ precmd () {
 }
 
 PROMPT='%{%f%k%b%}
-%{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_rprompt_exit_status) %{%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%} $(rvm_prompt_info)
+%{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_rprompt_exit_status) %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%} $(rvm_prompt_info)
 $(_prompt_char)% %#%{%f%k%b%} '
