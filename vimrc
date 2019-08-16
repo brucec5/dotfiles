@@ -60,8 +60,8 @@ set smarttab
 set tabstop=2
 set wildmenu
 
-imap <silent> jk <Esc>
-imap <silent> kj <Esc>
+"imap <silent> jk <Esc>
+"imap <silent> kj <Esc>
 
 " Map C-s to a nop???
 nnoremap <silent> <C-S> <NOP>
