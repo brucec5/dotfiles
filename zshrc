@@ -49,7 +49,7 @@ ZSH_THEME="mytheme-custom"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow osx rails)
+plugins=(docker git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,8 +62,8 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin
 if [ $(uname) != "Linux" ]; then
   export EDITOR=subl
   # Use most on mac since vimpager seems to have issues (at least on my machine)
-  alias less=most
-  export PAGER=most
+  #alias less=most
+  #export PAGER=most
 else
   export EDITOR=vim
   alias less=vimpager
