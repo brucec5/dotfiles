@@ -1,13 +1,21 @@
--- Static application switcher keybinds
-hs.hotkey.bind({"cmd", "ctrl"}, "/", function()
-  local slackApp = hs.application.get('Slack')
-  if slackApp then
-    local slackWindow = slackApp:mainWindow()
+function focusWindow(appName)
+  local theApp = hs.application.get(appName)
+  if theApp then
+    local theWindow = theApp:mainWindow()
 
-    if slackWindow then
-      slackWindow:focus()
+    if theWindow then
+      theWindow:focus()
     end
   end
+end
+
+-- Static application switcher keybinds
+hs.hotkey.bind({"cmd", "ctrl"}, "/", function()
+  focusWindow("Slack")
+end)
+
+hs.hotkey.bind({"cmd", "ctrl", "shift"}, "/", function()
+  focusWindow("Symphony")
 end)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "l", function()
