@@ -55,9 +55,10 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-export GOPATH=~/go
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
 
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$HOME/go/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$GOPATH/bin:$GOROOT/bin
 
 if [ $(uname) != "Linux" ]; then
   export EDITOR=subl
