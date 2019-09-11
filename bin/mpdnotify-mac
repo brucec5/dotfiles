@@ -1,4 +1,6 @@
 #!/bin/zsh
+[ "$MPD_PLAYER_STATE" = "play" ] || exit
+
 IMG_REG="(Front|front|Cover|cover|Art|art|Folder|folder)\.(jpg|jpeg|png|gif)$"
 MUSIC_DIR="${HOME}/Music"
 
