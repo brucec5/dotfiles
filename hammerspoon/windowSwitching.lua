@@ -14,14 +14,6 @@ hs.hotkey.bind({"cmd", "ctrl"}, "/", function()
   focusWindow("Slack")
 end)
 
-hs.hotkey.bind({"cmd", "ctrl", "shift"}, "/", function()
-  focusWindow("Symphony")
-end)
-
-hs.hotkey.bind({"cmd", "ctrl"}, "l", function()
-  hs.execute(os.getenv("HOME") .. "/bin/lockscreen")
-end)
-
 -- Application Switcher
 switcher = hs.window.switcher.new()
 
