@@ -62,13 +62,8 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin
 
 if [ $(uname) != "Linux" ]; then
   export EDITOR=subl
-  # Use most on mac since vimpager seems to have issues (at least on my machine)
-  #alias less=most
-  #export PAGER=most
 else
   export EDITOR=vim
-  alias less=vimpager
-  export PAGER=vimpager
 fi
 export GIT_EDITOR=vim
 
