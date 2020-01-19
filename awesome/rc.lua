@@ -533,23 +533,23 @@ globalkeys = awful.util.table.join(
   ),
   awful.key(
     { modkey }, "F11",
-    function() awful.util.spawn('/usr/bin/amixer -q sset Master 9%- unmute') end,
+    function() awful.util.spawn('/usr/bin/amixer -q sset Master 4%- unmute') end,
     { description = "Decrease volume", group = "audio" }
   ),
   awful.key(
     { modkey }, "F12",
-    function() awful.util.spawn('/usr/bin/amixer -q sset Master 9%+ unmute') end,
+    function() awful.util.spawn('/usr/bin/amixer -q sset Master 4%+ unmute') end,
     { description = "Increase volume", group = "audio" }
   ),
 
   awful.key(
     { modkey, "Shift" }, "F11",
-    function() awful.util.spawn('/usr/bin/amixer -q sset Master 3%- unmute') end,
+    function() awful.util.spawn('/usr/bin/amixer -q sset Master 2%- unmute') end,
     { description = "Decrease volume a bit", group = "audio" }
   ),
   awful.key(
     { modkey, "Shift" }, "F12",
-    function() awful.util.spawn('/usr/bin/amixer -q sset Master 3%+ unmute') end,
+    function() awful.util.spawn('/usr/bin/amixer -q sset Master 2%+ unmute') end,
     { description = "Increase volume a bit", group = "audio" }
   ),
 

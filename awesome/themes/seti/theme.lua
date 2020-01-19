@@ -3,7 +3,7 @@ theme = {}
 -- }}}
 
 -- {{{ Styles
-theme.font = "Schumacher Clean 8"
+theme.font = "Ubuntu Light 10"
 theme.tasklist_disable_icon = true
 
 -- {{{ Colors
