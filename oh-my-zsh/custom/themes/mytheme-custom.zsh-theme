@@ -31,6 +31,12 @@ precmd () {
   fi
 }
 
+_AWS_OKTA_PROMPT=''
+
+if [ -n "$AWS_OKTA_PROFILE" ]; then
+  _AWS_OKTA_PROMPT="%{%b%F{green}%}(aws: $AWS_OKTA_PROFILE) "
+fi
+
 PROMPT='%{%f%k%b%}
-%{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_exit_status) %{%b%F{yellow}%}%~ $(git_prompt_info)%E%{%f%k%b%}
+%{%b%F{yellow}%}(level $SHLVL) %{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_exit_status) %{%b%F{yellow}%}%~ $_AWS_OKTA_PROMPT$(git_prompt_info)%E%{%f%k%b%}
 %{%b%F{cyan}%}%m %{%f%k%b%}%# '
