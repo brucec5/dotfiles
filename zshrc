@@ -119,6 +119,13 @@ alias gus="nocorrect git unstage"
 alias gusp="git unstage -p"
 compdef _git gs=git-status
 
+if [ "$TERM" = "xterm-kitty" ]; then
+  alias icat="kitty +kitten icat"
+  alias kdiff="kitty +kitten diff"
+
+  alias ggd="git difftool --no-symlinks --dir-diff"
+fi
+
 alias cspec="script/spec -c -f n"
 
 function this-branch() {

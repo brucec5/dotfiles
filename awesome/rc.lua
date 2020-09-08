@@ -47,7 +47,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/chris/.config/awesome/themes/seti/theme.lua")
+beautiful.init("/home/chris/.config/awesome/themes/nordic/theme.lua")
 
 function colorify_range(text, mid_boundary, high_boundary)
   mid_boundary = mid_boundary or 50
@@ -68,7 +68,7 @@ function colorify_range(text, mid_boundary, high_boundary)
 end
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 

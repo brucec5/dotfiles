@@ -55,14 +55,4 @@ URxvt*keysym*Control-Right: \033[1;5C
 
 Xft.dpi: 96
 
-! plugins
-URxvt.perl-ext-common: default,matcher,keyboard-select
-
-! keyboard-select
-URxvt.keysym.M-s: perl:keyboard-select:activate
-URxvt.keysym.M-r: perl:keyboard-select:search
-
-! matcher
-URxvt.keysym.C-Delete: perl:matcher:last
-URxvt.keysym.M-Delete: perl:matcher:list
 URxvt.url-launcher: /usr/bin/xdg-open
