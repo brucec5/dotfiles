@@ -3,7 +3,8 @@ theme = {}
 -- }}}
 
 -- {{{ Styles
-theme.font = "Ubuntu Light 10"
+theme.font = "Ubuntu Mono Regular 10"
+theme.wibar_height = 23
 theme.tasklist_disable_icon = true
 
 -- {{{ Colors
@@ -13,7 +14,7 @@ theme.fg_urgent  = "#2E3440"
 theme.fg_accent  = "#81A1C1"
 theme.fg_ok      = "#A3BE8C"
 theme.fg_warn    = "#EBCB8B"
-theme.fg_error   = "#88C0D0"
+theme.fg_error   = "#BF616A"
 theme.bg_normal  = "#2E3440"
 theme.bg_focus   = "#3B4252"
 theme.bg_urgent  = "#BF616A"

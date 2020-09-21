@@ -4,8 +4,14 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+-- Old widgets
 local lain = require("lain")
 local markup = lain.util.markup
+-- Newer widgets
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+local volumebar_widget = require("awesome-wm-widgets.volumebar-widget.volumebar")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
@@ -136,22 +142,20 @@ mytextclock = wibox.widget.textclock()
 monthcalendar = awful.widget.calendar_popup.month()
 monthcalendar:attach(mytextclock, 'tr')
 
-separator = wibox.widget.textbox(' | ')
+separator = wibox.widget.textbox(' ')
 
-cpuwidget = lain.widget.cpu({
-  settings = function()
-    cpu_perc1 = colorify_range(string.format("%2d%%", cpu_now[1].usage))
-    cpu_perc2 = colorify_range(string.format("%2d%%", cpu_now[2].usage))
-    cpu_perc3 = colorify_range(string.format("%2d%%", cpu_now[3].usage))
-    cpu_perc4 = colorify_range(string.format("%2d%%", cpu_now[4].usage))
-    widget:set_markup(string.format("CPU %s %s %s %s", cpu_perc1, cpu_perc2, cpu_perc3, cpu_perc4))
-  end
+cpuwidget = cpu_widget({
+  enable_kill_button = true,
+  timeout = 3
 })
 
-memwidget = lain.widget.mem({
-  settings = function()
-    widget:set_markup("MEM " .. colorify_range(mem_now.perc .. "%"))
-  end
+memwidget = ram_widget({
+  timeout = 3,
+  used_color = beautiful.bg_urgent,
+  free_color = beautiful.fg_accent,
+  buff_cache_color = beautiful.fg_ok,
+  widget_used_color = beautiful.bg_urgent,
+  widget_unused_color = beautiful.fg_accent
 })
 
 mpdwidget = lain.widget.mpd({
@@ -165,34 +169,20 @@ mpdwidget = lain.widget.mpd({
   music_dir = "/mnt/shared/Music"
 })
 
-alsawidget = lain.widget.alsa({
-  settings = function()
-    if volume_now.status == "on" then
-      widget:set_markup("ALSA " .. colorify_range(volume_now.level .. "%"))
-    else
-      widget:set_markup("ALSA --%")
-    end
-  end,
-  cmd = 'amixer -M'
+alsawidget = volumebar_widget({
+  timeout = 3,
+  mute_color = beautiful.bg_urgent
 })
 
 thermwidget = lain.widget.temp({
   settings = function()
-    widget:set_markup("THERM " .. colorify_range(coretemp_now, 43, 48))
+    widget:set_markup("THERM: " .. colorify_range(string.format("%.fC", coretemp_now), 48, 55))
   end,
-  tempfile = "/sys/class/thermal/thermal_zone2/temp"
+  tempfile = "/sys/devices/virtual/thermal/thermal_zone2/temp"
 })
 
-netwidget = lain.widget.net({
-  settings = function()
-    widget:set_markup(
-      string.format(
-        "NET %s/%s",
-        colorify_range(net_now.sent),
-        colorify_range(net_now.received)
-      )
-    )
-  end
+netwidget = net_speed_widget({
+  timeout = 3
 })
 
 redshiftwidget = wibox.widget.textbox("RS")
@@ -307,16 +297,21 @@ awful.screen.connect_for_each_screen(function(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       mpdwidget,
-      separator,
       netwidget,
       separator,
-      alsawidget,
-      separator,
-      thermwidget,
+      wibox.widget.textbox('CPU:'),
       separator,
       cpuwidget,
       separator,
+      separator,
+      wibox.widget.textbox('MEM:'),
       memwidget,
+      separator,
+      thermwidget,
+      separator,
+      wibox.widget.textbox('ALSA:'),
+      separator,
+      alsawidget,
       separator,
       redshiftwidget,
       separator,
