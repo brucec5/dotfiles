@@ -105,7 +105,11 @@ nnoremap <silent> <leader>l
       \	endif<CR>
 
 set background=dark
-colorscheme desert
+try
+  colorscheme dim
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme desert
+endtry
 
 " Highlight the current line!
 "set cursorline

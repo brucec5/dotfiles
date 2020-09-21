@@ -60,6 +60,11 @@ export GOROOT=/usr/local/go
 
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$GOPATH/bin:$GOROOT/bin
 
+# If neovim is installed, alias that to vim because muscle memory
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
+
 if [ $(uname) != "Linux" ]; then
   export EDITOR=subl
 else
@@ -120,6 +125,7 @@ alias gusp="git unstage -p"
 compdef _git gs=git-status
 
 if [ "$TERM" = "xterm-kitty" ]; then
+  kitty + complete setup zsh | source /dev/stdin
   alias icat="kitty +kitten icat"
   alias kdiff="kitty +kitten diff"
 
