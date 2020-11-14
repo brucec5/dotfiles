@@ -124,7 +124,7 @@ alias gus="nocorrect git unstage"
 alias gusp="git unstage -p"
 compdef _git gs=git-status
 
-if [ "$TERM" = "xterm-kitty" ]; then
+if [ "$TERM" = "xterm-kitty" ] && which kitty >/dev/null; then
   kitty + complete setup zsh | source /dev/stdin
   alias icat="kitty +kitten icat"
   alias kdiff="kitty +kitten diff"
