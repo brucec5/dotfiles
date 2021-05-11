@@ -15,4 +15,6 @@ watcher = hs.pathwatcher.new(
   reloadConfig
 ):start()
 
+hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "r", function() hs.relaunch() end)
+
 hs.alert.show("Hammerspoon Config Loaded!")
