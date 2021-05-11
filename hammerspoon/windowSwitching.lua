@@ -60,6 +60,12 @@ hs.hotkey.bind({"alt"}, "escape", function()
   )
 end)
 
+-- Fuzzy Window Switcher
+-- Mostly cribbed from https://gist.github.com/RainmanNoodles/70aaff04b20763041d7acb771b0ff2b2
+
+fuzzyChoices = nil
+fuzzyChooser = nil
+
 function pickWindow(choice)
   if choice == nil then
     logger.i("Not picking any window")
@@ -71,36 +77,94 @@ function pickWindow(choice)
   window:focus()
 end
 
-chooser = hs.chooser.new(pickWindow)
-
 -- some windows are dumb and I don't want to find them
 function shouldSkipWindow(win)
   if not win:isStandard() then return true end
   if win:title() == "Microsoft Teams Notification" then return true end
 end
 
-function windowFinderChoices()
-  logger.i("getting choices")
-  return hs.fnutils.map(
-    hs.window.allWindows(),
-    function(win)
-      if shouldSkipWindow(win) then
+-- Fuzzily find a query within text.
+-- Basically, it finds a subsequence in text with the characters from query,
+-- and uses how long that subsequence is to define a score (shorter subsequence means better score)
+function fuzzyQuery(text, query)
+  textIndex = 1
+  queryIndex = 1
+  matchStart = nil
+
+  while true do
+    if textIndex > text:len() or queryIndex > query:len() then
+      return -1
+    end
+
+    textChar = text:sub(textIndex, textIndex)
+    queryChar = query:sub(queryIndex, queryIndex)
+
+    if textChar == queryChar then
+      if matchStart == nil then
+        matchStart = textIndex
+      end
+
+      textIndex = textIndex + 1
+      queryIndex = queryIndex + 1
+
+      if queryIndex > query:len() then
+        matchEnd = textIndex
+        textMatchLength = matchEnd - matchStart
+        score = query:len() / textMatchLength
+        return score
+      end
+    else
+      textIndex = textIndex + 1
+    end
+  end
+end
+
+function fuzzyFilterChoices(query)
+  if query:len() == 0 then
+    fuzzyChooser:choices(fuzzyChoices)
+    return
+  end
+
+  pickedChoices = hs.fnutils.map(
+    fuzzyChoices,
+    function(choice)
+      fullText = (choice.text .. " " .. choice.subText):lower()
+      score = fuzzyQuery(fullText, query:lower())
+
+      if score > 0 then
+        choice["fzf_score"] = score
+        return choice
+      else
         return nil
       end
+    end
+  )
+
+  local sortFunc = function(a,b) return a.fzf_score > b.fzf_score end
+  table.sort(pickedChoices, sortFunc)
+  fuzzyChooser:choices(pickedChoices)
+end
+
+function windowFuzzySearch()
+  fuzzyChoices = hs.fnutils.map(
+    hs.window.filter.default:getWindows(hs.window.filter.sortByFocusedLast),
+    function(win)
+      if shouldSkipWindow(win) then return nil end
 
       local app = win:application()
 
       return {
-        text    = win:title(),
+        text = win:title(),
         subText = app:name(),
-        image   = hs.image.imageFromAppBundle(app:bundleID()),
-        windowId    = win:id()
+        image = hs.image.imageFromAppBundle(app:bundleID()),
+        windowId = win:id()
       }
     end
   )
+
+  fuzzyChooser = hs.chooser.new(pickWindow):choices(fuzzyChoices):searchSubText(true)
+  fuzzyChooser:queryChangedCallback(fuzzyFilterChoices)
+  fuzzyChooser:show()
 end
 
-chooser:choices(windowFinderChoices):searchSubText(true)
-
-hs.hotkey.bind({"cmd", "alt"}, "i", function() chooser:show() end)
-hs.hotkey.bind({"cmd", "alt", "shift"}, "i", function() chooser:hide() end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "j", windowFuzzySearch)
