@@ -1,29 +1,21 @@
 set nocompatible
 
-" For Vundle
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"For vim-plug
+call plug#begin()
 
-Plugin 'VundleVim/Vundle.vim'
+"Plug 'chriskempson/base16-vim'
+Plug 'jeffkreeftmeijer/vim-dim'
 
-Plugin 'chriskempson/base16-vim'
-Plugin 'godlygeek/tabular'
-Plugin 'henrik/vim-indexed-search.git'
-Plugin 'kchmck/vim-coffee-script.git'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'scrooloose/nerdcommenter.git'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'szw/vim-tags'
-Plugin 'tpope/vim-endwise.git'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rvm'
-Plugin 'tpope/vim-surround'
+Plug 'preservim/nerdcommenter'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-surround'
+Plug 'wellle/targets.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
 
-call vundle#end()
+call plug#end()
+
 filetype plugin indent on
 
 "change mapleader to , from \
@@ -60,9 +52,6 @@ set smarttab
 set tabstop=2
 set wildmenu
 
-"imap <silent> jk <Esc>
-"imap <silent> kj <Esc>
-
 " Map C-s to a nop???
 nnoremap <silent> <C-S> <NOP>
 
@@ -76,33 +65,10 @@ nmap <silent> <leader>g :CtrlPTag<CR>
 nmap <silent> <leader>/ :nohlsearch<CR>
 
 " Toggle NERDTree with leader-f
-nmap <silent> <leader>f :NERDTreeToggle<CR>
+"nmap <silent> <leader>f :NERDTreeToggle<CR>
 
 nmap <F1> <Esc>
 imap <F1> <Esc>
-
-" Display trailing whitespace as an error
-"match ErrorMsg /\s\+$/
-
-" If a #! is detected, set executable bit on writing.
-function! SetExecutableIfScript(line1, current_file)
-	if a:line1 =~ '^#!\(/usr\)*/bin/'
-		let chmod_command = "silent !chmod +x " . a:current_file
-		execute chmod_command
-	endif
-endfunction
-autocmd BufWritePost * call SetExecutableIfScript(getline(1), expand("%:p"))
-
-" leader l to highlight long lines (length set by textwidth)
-nnoremap <silent> <leader>l
-      \ :if exists('w:long_line_match') <Bar>
-      \ 	silent! call matchdelete(w:long_line_match) <Bar>
-      \		unlet w:long_line_match <Bar>
-      \	elseif &textwidth > 0 <Bar>
-      \		let w:long_line_match = matchadd('ErrorMsg', '\%>' . &tw . 'v.\+', -1) <Bar>
-      \	else <Bar>
-      \		let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
-      \	endif<CR>
 
 set background=dark
 try
@@ -112,20 +78,9 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 " Highlight the current line!
-"set cursorline
-"hi CursorLine cterm=bold gui=bold guibg=bg
-"hi CursorLineNR guifg=#ffcc66 ctermbg=3
-
-if !exists("vimpager")
-  set wildignore+=*/tmp/*,*/vendor/*,*/log/*,*/sql/*,*/node_modules/*
-endif
-
-"let g:ctrlp_user_command = {
-  "\ 'types': {
-    "\ 1: ['.git', 'cd %s && git ls-files . -co --exclude-standard']
-    "\ },
-  "\ 'fallback': 'find %s -type f'
-  "\ }
+set cursorline
+hi CursorLine cterm=bold
+hi CursorLineNR ctermbg=0 cterm=bold
 
 " Override the .md file extension to be for markdown instead of modula
 au BufRead,BufNewFile *.md set filetype=markdown
@@ -135,11 +90,6 @@ let g:vim_markdown_folding_disabled=1
 " Turn off the damn bell
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
-
-" Mapping for tabularizing on equals
-nmap <silent> <leader><Tab>= :Tab /=<CR>
-nmap <silent> <leader><Tab>> :Tab /=><CR>
-nmap <silent> <leader><Tab>{ :Tab /{<CR>
 
 " Map <C-movement key> to move buffers
 map <C-k> <C-w><Up>
@@ -153,7 +103,3 @@ map <C-Left> <C-w><Left>
 
 " Autosave on focus loss
 autocmd BufLeave,FocusLost * silent! wall
-
-let vimpager_use_gvim = 0
-let vimpager_scrolloff = 0
-let vimpager_passthrough = 1
