@@ -1,0 +1,27 @@
+#!/bin/bash
+
+operation=$1
+direction=$2
+current_workspace=$(swaymsg -pt get_workspaces | grep '(focused)' | cut -d' ' -f2)
+
+case "$direction" in
+  next)
+    new_workspace=$((($current_workspace + 1) % 10))
+    ;;
+  prev)
+    new_workspace=$((($current_workspace - 1) % 10))
+    ;;
+esac
+
+if [ $(($new_workspace)) == 0 ]; then
+  new_workspace=10
+fi
+
+case "$operation" in
+  move-container)
+    swaymsg move container to workspace "$new_workspace"
+    ;;
+  switch)
+    swaymsg workspace "$new_workspace"
+    ;;
+esac

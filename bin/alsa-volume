@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function master_status() {
+  local status_type="$1"
+
+  case "$status_type" in
+    volume)
+      col='$2' # yeah, that's a literal dollar sign two
+      ;;
+    enabled)
+      col='$6'
+      ;;
+  esac
+
+  amixer -M get Master | grep '%' | awk -F '[][]' "{print ${col}}"
+}
+
+#amixer get Master | grep '%' | awk -F '[][]' '{print $2}'
+
+if [ "$(master_status enabled)" = "on" ]; then
+  master_status volume
+else
+  echo ""
+  echo
+  echo muted
+fi

@@ -1,0 +1,9 @@
+[Unit]
+Description=ALSA Waybar Updater
+
+[Service]
+Type=simple
+ExecStart=%h/dotfiles/bin/alsa-waybar
+
+[Install]
+WantedBy=default.target
