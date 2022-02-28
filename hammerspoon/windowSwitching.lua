@@ -12,10 +12,6 @@ function focusWindow(appName)
 end
 
 -- Static application switcher keybinds
-hs.hotkey.bind({"cmd", "ctrl"}, "/", function()
-  focusWindow("Slack")
-end)
-
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function()
   focusWindow("Microsoft Teams")
 end)
@@ -74,6 +70,10 @@ function pickWindow(choice)
 
   logger.i("Picking window " .. choice.text)
   local window = hs.window.get(choice.windowId)
+  if window == nil then
+    logger.i("Found window was nil!")
+    return
+  end
   window:focus()
 end
 
@@ -119,6 +119,88 @@ function fuzzyQuery(text, query)
   end
 end
 
+Matrix = {}
+
+function Matrix:new(width, height)
+  m = {
+    width = width,
+    height = height,
+    data = {}
+  }
+
+  setmetatable(m, self)
+  self.__index = self
+  return m
+end
+
+function Matrix:set(x, y, value)
+  self.data[y * self.width + x] = value
+end
+
+function Matrix:get(x, y, default)
+  return self.data[y * self.width + x] or default
+end
+
+function fuzzyQueryDP(text, query)
+  if #query > #text then return nil end
+
+  scores = Matrix:new(text:len(), query:len())
+
+  for qIndex=1, #query do
+    max = nil
+    maxIndex = 1
+
+    for tIndex=qIndex, #text do
+      t = text:sub(tIndex, tIndex)
+      q = query:sub(qIndex, qIndex)
+
+      -- print("looking at t='" .. t .. "' q='" .. q .. "' index=" .. tIndex)
+
+      if t == q then
+        max = max or -100
+        previous = scores:get(tIndex - 1, qIndex - 1, {score = 0, max = 0, maxIndex = tIndex-1})
+
+        if previous.max == nil then
+          goto continue
+        end
+
+        gap = tIndex - previous.maxIndex - 1
+        score = previous.max + 1 - gap
+        if score >= max then
+          maxIndex = tIndex
+        end
+        max = math.max(max, score)
+
+        scores:set(tIndex, qIndex, {score = score, max = max, maxIndex = maxIndex})
+      else
+        scores:set(tIndex, qIndex, {score = nil, max = max, maxIndex = maxIndex})
+      end
+      ::continue::
+    end
+
+    if max == nil then
+      return nil
+    end
+  end
+
+  globalMax = nil
+  for tIndex=#query, #text do
+    score = scores:get(tIndex, #query)
+    -- print("getting score=" .. (score.score or "nil") .. " max=" .. score.max .. " maxIndex=" .. maxIndex)
+
+    if score ~= nil and score.score ~= nil then
+      -- print("we got score " .. score.score)
+      if globalMax == nil then
+        globalMax = score.score
+      else
+        globalMax = math.max(globalMax, score.score)
+      end
+    end
+  end
+
+  return globalMax
+end
+
 function fuzzyFilterChoices(query)
   if query:len() == 0 then
     fuzzyChooser:choices(fuzzyChoices)
@@ -129,9 +211,9 @@ function fuzzyFilterChoices(query)
     fuzzyChoices,
     function(choice)
       fullText = (choice.text .. " " .. choice.subText):lower()
-      score = fuzzyQuery(fullText, query:lower())
+      score = fuzzyQueryDP(fullText, query:lower())
 
-      if score > 0 then
+      if score ~= nil then
         choice["fzf_score"] = score
         return choice
       else

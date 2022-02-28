@@ -1,15 +1,7 @@
 #!/bin/zsh
-[ "$MPD_PLAYER_STATE" = "play" ] || exit
+[ "$1" = "status" ] || [ "$MPD_PLAYER_STATE" = "play" ] || exit
 
-IMG_REG="(Front|front|Cover|cover|Art|art|Folder|folder)\.(jpg|jpeg|png|gif)$"
-MUSIC_DIR="${HOME}/Music"
+title=$(mpc -h 192.168.0.104 current -f "[%track% - ]%title%")
+artist="$(mpc -h 192.168.0.104 current -f "%artist%")"
 
-title=$(mpc current -f "[%track% - ]%title%")
-artist="$(mpc current -f "%artist%")"
-
-file="$(mpc current -f "%file%")"
-dir="${MUSIC_DIR}/$(dirname ${file})"
-cover="$(find "${dir}" -maxdepth 1 -type f | egrep -i -m1 "${IMG_REG}")"
-
-# TODO: see if extracting cover art from MP3 files is woth it?
-/usr/local/bin/terminal-notifier -title "${title}" -message "${artist}" -sender com.apple.Itunes -contentImage "${cover}"
+/usr/local/bin/terminal-notifier -title "${title}" -message "${artist}" -sender com.apple.Itunes

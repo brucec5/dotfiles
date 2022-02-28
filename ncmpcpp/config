@@ -278,7 +278,7 @@ song_columns_list_format = (1f)[green]{} (6f)[green]{NE} (20)[]{a} (50)[white]{t
 ## state (either unknown, play, pause, or stop) for its duration.
 ##
 #
-execute_on_player_state_change = "~/bin/ncmpcpp-state-change"
+#execute_on_player_state_change = "~/bin/ncmpcpp-state-change"
 #
 #playlist_show_mpd_host = no
 #
