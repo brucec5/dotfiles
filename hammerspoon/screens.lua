@@ -35,7 +35,7 @@ for screen, pos in pairs(monitors) do
     local center = hs.geometry.rectMidPoint(rect)
     hs.mouse.absolutePosition(center)
 
-    drawMouseCircle(1)
+    drawMouseCircle(2)
   end)
 end
 

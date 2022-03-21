@@ -16,6 +16,10 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function()
   focusWindow("Microsoft Teams")
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "o", function()
+  focusWindow("Microsoft Outlook")
+end)
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
   focusWindow("Citrix SSO")
 end)
