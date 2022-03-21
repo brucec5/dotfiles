@@ -1,12 +1,5 @@
 local logger = hs.logger.new("screens", "info")
 
-local watcher = hs.screen.watcher.new(function()
-  logger.i("Screens changed!")
-  hs.alert("whoa! screens changed!", {}, hs.screen.mainScreen())
-end)
-
-watcher:start()
-
 local monitors = hs.screen.screenPositions()
 
 local monitorCount = 0
