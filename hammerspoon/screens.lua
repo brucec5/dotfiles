@@ -32,10 +32,7 @@ for screen, pos in pairs(monitors) do
     logger.d("Moving mouse to screen " .. hs.inspect.inspect(screen))
 
     local rect = screen:fullFrame()
-    local center = hs.geometry.rectMidPoint(rect)
-    hs.mouse.absolutePosition(center)
-
-    drawMouseCircle(2)
+    moveMouseTo(rect)
   end)
 end
 

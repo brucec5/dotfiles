@@ -33,6 +33,19 @@ function drawMouseCircle(duration)
   end)
 end
 
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "D", function()
+function moveMouseTo(frame)
+  local center = hs.geometry.rectMidPoint(frame)
+  hs.mouse.absolutePosition(center)
+  drawMouseCircle(2)
+end
+
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "d", function()
   drawMouseCircle(3)
+end)
+
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "m", function()
+  local win = hs.window.focusedWindow()
+  local frame = win:frame()
+
+  moveMouseTo(frame)
 end)

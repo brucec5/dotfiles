@@ -11,6 +11,8 @@ function focusWindow(appName)
   end
 end
 
+hs.application.enableSpotlightForNameSearches(true)
+
 -- Static application switcher keybinds
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function()
   focusWindow("Microsoft Teams")
@@ -25,7 +27,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, ".", function()
-  focusWindow("com.webex.meetingmanager")
+  focusWindow("Cisco Webex Meetings")
 end)
 
 -- Application Switcher
