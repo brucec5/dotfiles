@@ -38,6 +38,6 @@ end
 
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "s", function()
   for screen, pos in pairs(monitors) do
-    hs.alert("Screen " .. (pos.x + offset), {}, screen)
+    hs.alert("Screen " .. (pos.x + offset) .. "/" .. monitorCount, {}, screen)
   end
 end)

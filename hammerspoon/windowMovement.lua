@@ -1,12 +1,13 @@
+local logger = hs.logger.new("windowMovement", "info")
+
 -- Set to true if weird window movement/resizing issues are encountered
 -- Will make window movement/resizing a bit less snappy.
 hs.window.setFrameCorrectness = false
 
 local mash = {
-  grow = {"alt", "ctrl", "cmd"},
   snap = {"alt", "ctrl"},
   shrink = {"cmd", "ctrl"},
-  shrinkSmall = {"cmd", "ctrl", "shift"},
+  move = {"alt", "ctrl", "cmd"},
 }
 
 -- TODO: DRY this up
@@ -94,94 +95,30 @@ hs.hotkey.bind(mash.shrink, "down", function()
   win:setFrame(f)
 end)
 
--- Shrink by a quarter horizontally, to the left
-hs.hotkey.bind(mash.shrinkSmall, "left", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+function screenCount()
+  local count = 0
 
-  f.w = f.w * 3 / 4
-  win:setFrame(f)
+  for i in pairs(hs.screen.screenPositions()) do
+    count = count + 1
+  end
+
+  return count
+end
+
+-- Move window one monitor leftwards
+hs.hotkey.bind(mash.move, "left", function()
+  local win = hs.window.focusedWindow()
+  local pos = win:screen():position()
+  local newPos = (pos + 1) % screenCount()
+
+  win:moveToScreen{x=newPos,y=0}
 end)
 
--- Shrink by a quarter horizontally, to the right
-hs.hotkey.bind(mash.shrinkSmall, "right", function()
+-- Move window one monitor rightwards
+hs.hotkey.bind(mash.move, "right", function()
   local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+  local pos = win:screen():position()
+  local newPos = (pos - 1) % screenCount()
 
-  f.x = f.x + f.w / 4
-  f.w = f.w * 3 / 4
-  win:setFrame(f)
-end)
-
--- Shrink by a quarter vertically, upwards
-hs.hotkey.bind(mash.shrinkSmall, "up", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.h = f.h * 3 / 4
-  win:setFrame(f)
-end)
-
--- Shrink by a quarter vertically, downwards
-hs.hotkey.bind(mash.shrinkSmall, "down", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.y = f.y + f.h / 4
-  f.h = f.h * 3 / 4
-  win:setFrame(f)
-end)
-
--- Double horizontal size leftwards
-hs.hotkey.bind(mash.grow, "left", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = f.x - f.w
-  f.w = f.w * 2
-  win:setFrame(f)
-end)
-
--- Double horizontal size rightwards
-hs.hotkey.bind(mash.grow, "right", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.w = f.w * 2
-  win:setFrame(f)
-end)
-
--- Double vertical size upwards
-hs.hotkey.bind(mash.grow, "up", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.y = f.y - f.h
-  f.h = f.h * 2
-  win:setFrame(f)
-end)
-
--- Double vertical size downwards
-hs.hotkey.bind(mash.grow, "down", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.h = f.h * 2
-  win:setFrame(f)
+  win:moveToScreen{x=newPos,y=0}
 end)
