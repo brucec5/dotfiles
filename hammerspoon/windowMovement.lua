@@ -105,20 +105,19 @@ function screenCount()
   return count
 end
 
--- Move window one monitor leftwards
-hs.hotkey.bind(mash.move, "left", function()
-  local win = hs.window.focusedWindow()
+function moveToScreenDelta(win, delta)
   local pos = win:screen():position()
-  local newPos = (pos + 1) % screenCount()
+  local newPos = (pos + delta) % screenCount()
 
   win:moveToScreen{x=newPos,y=0}
+end
+
+-- Move window one monitor leftwards
+hs.hotkey.bind(mash.move, "left", function()
+  moveToScreenDelta(hs.window.focusedWindow(), -1)
 end)
 
 -- Move window one monitor rightwards
 hs.hotkey.bind(mash.move, "right", function()
-  local win = hs.window.focusedWindow()
-  local pos = win:screen():position()
-  local newPos = (pos - 1) % screenCount()
-
-  win:moveToScreen{x=newPos,y=0}
+  moveToScreenDelta(hs.window.focusedWindow(), 1)
 end)
