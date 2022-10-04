@@ -30,10 +30,12 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin
 # If neovim is installed, alias that to vim because muscle memory
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
+  export EDITOR=nvim
+  export GIT_EDITOR=nvim
+else
+  export EDITOR=vim
+  export GIT_EDITOR=vim
 fi
-
-export EDITOR=vim
-export GIT_EDITOR=vim
 
 alias untouch='rm'
 
@@ -41,7 +43,6 @@ alias reload='source ~/.zshrc'
 
 alias cdfinder="cd \"\$(osascript -e 'tell app \"Finder\" to POSIX path of (insertion location as alias)')\""
 
-alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
 alias got='nocorrect git'
 alias gut='nocorrect git'
