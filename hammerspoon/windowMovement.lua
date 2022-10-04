@@ -95,23 +95,6 @@ hs.hotkey.bind(mash.shrink, "down", function()
   win:setFrame(f)
 end)
 
-function screenCount()
-  local count = 0
-
-  for i in pairs(hs.screen.screenPositions()) do
-    count = count + 1
-  end
-
-  return count
-end
-
-function moveToScreenDelta(win, delta)
-  local pos = win:screen():position()
-  local newPos = (pos + delta) % screenCount()
-
-  win:moveToScreen{x=newPos,y=0}
-end
-
 -- Move window one monitor leftwards
 hs.hotkey.bind(mash.move, "left", function()
   moveToScreenDelta(hs.window.focusedWindow(), -1)

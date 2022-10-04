@@ -11,6 +11,28 @@ for screen, pos in pairs(monitors) do
   end
 end
 
+function screenCount()
+  local count = 0
+
+  for i in pairs(hs.screen.screenPositions()) do
+    count = count + 1
+  end
+
+  return count
+end
+
+function getScreenWithDelta(screen, delta)
+  local pos = screen:position()
+  local newPos = (pos + delta) % screenCount()
+
+  -- This assumes that I only ever use one row of monitors, which I think is a safe assumption
+  return hs.screen{x=newPos, y=0}
+end
+
+function moveToScreenDelta(win, delta)
+  win:moveToScreen(getScreenWithDelta(win:screen(), delta))
+end
+
 -- Offset makes it so the leftmost monitor is index 1, even if the main monitor is in the middle or elsewhere.
 local offset = -minXPosition + 1
 
@@ -35,6 +57,22 @@ for screen, pos in pairs(monitors) do
     moveMouseTo(rect)
   end)
 end
+
+hs.hotkey.bind({"ctrl", "alt", "cmd", "shift"}, "left", function()
+  local screen = getScreenWithDelta(hs.mouse.getCurrentScreen(), -1)
+  logger.d("Moving mouse to screen " .. hs.inspect.inspect(screen))
+
+  local rect = screen:fullFrame()
+  moveMouseTo(rect)
+end)
+
+hs.hotkey.bind({"ctrl", "alt", "cmd", "shift"}, "right", function()
+  local screen = getScreenWithDelta(hs.mouse.getCurrentScreen(), 1)
+  logger.d("Moving mouse to screen " .. hs.inspect.inspect(screen))
+
+  local rect = screen:fullFrame()
+  moveMouseTo(rect)
+end)
 
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "s", function()
   for screen, pos in pairs(monitors) do

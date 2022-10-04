@@ -31,7 +31,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, ".", function()
-  focusWindow("com.webex.meetingmanager", "Cisco Webex Meetings")
+  focusWindow("Cisco Webex Meetings", "Webex")
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, ",", function()
