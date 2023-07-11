@@ -10,11 +10,22 @@ local mash = {
   move = {"alt", "ctrl", "cmd"},
 }
 
+-- Needed because occasionally some windows aren't returned by focusedWindow
+-- despite being focused. They generally seem to get returned by
+-- frontmostWindow in these cases.
+function getWindow()
+  local win = hs.window.focusedWindow()
+  if win then
+    return win
+  end
+  return hs.window.frontmostWindow()
+end
+
 -- TODO: DRY this up
 
 -- Move to left half of screen
 hs.hotkey.bind(mash.snap, "left", function()
-  local win = hs.window.focusedWindow()
+  local win = getWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -28,7 +39,7 @@ end)
 
 -- Move to right half of screen!
 hs.hotkey.bind(mash.snap, "right", function()
-  local win = hs.window.focusedWindow()
+  local win = getWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -42,7 +53,7 @@ end)
 
 -- Maximize
 hs.hotkey.bind(mash.snap, "up", function()
-  local win = hs.window.focusedWindow()
+  local win = getWindow()
   local f = win:frame()
   local screen = win:screen()
 
@@ -51,7 +62,7 @@ end)
 
 -- Shrink by half horizontally, to the left
 hs.hotkey.bind(mash.shrink, "left", function()
-  local win = hs.window.focusedWindow()
+  local win = getWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -62,7 +73,7 @@ end)
 
 -- Shrink by half horizontally, to the right
 hs.hotkey.bind(mash.shrink, "right", function()
-  local win = hs.window.focusedWindow()
+  local win = getWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -74,7 +85,7 @@ end)
 
 -- Shrink by half vertically, upwards
 hs.hotkey.bind(mash.shrink, "up", function()
-  local win = hs.window.focusedWindow()
+  local win = getWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -85,7 +96,7 @@ end)
 
 -- Shrink by half vertically, downwards
 hs.hotkey.bind(mash.shrink, "down", function()
-  local win = hs.window.focusedWindow()
+  local win = getWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -97,10 +108,10 @@ end)
 
 -- Move window one monitor leftwards
 hs.hotkey.bind(mash.move, "left", function()
-  moveToScreenDelta(hs.window.focusedWindow(), -1)
+  moveToScreenDelta(getWindow(), -1)
 end)
 
 -- Move window one monitor rightwards
 hs.hotkey.bind(mash.move, "right", function()
-  moveToScreenDelta(hs.window.focusedWindow(), 1)
+  moveToScreenDelta(getWindow(), 1)
 end)

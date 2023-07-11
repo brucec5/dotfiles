@@ -14,3 +14,12 @@ if emailFile then
 else
   logger.i("Could not find " .. emailFilePath)
 end
+
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "p", function()
+  paste = hs.pasteboard.getContents()
+  if paste == nil then
+    hs.alert.show("Error grabbing paste data for some reason")
+  else
+    hs.eventtap.keyStrokes(paste)
+  end
+end)

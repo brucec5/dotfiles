@@ -5,7 +5,7 @@ require("hs.ipc")
 
 require("audio")
 require("caffeine")
-require("mpd")
+-- require("mpd")
 require("misc")
 require("session")
 require("screens")
