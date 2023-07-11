@@ -16,6 +16,8 @@ ZSH_CUSTOM=$HOME/dotfiles/oh-my-zsh/custom
 # time that oh-my-zsh is loaded.
 ZSH_THEME="mytheme-custom"
 
+zstyle ':omz:update' frequency 7
+
 plugins=(docker git colored-man-pages)
 
 source "$ZSH/oh-my-zsh.sh"
