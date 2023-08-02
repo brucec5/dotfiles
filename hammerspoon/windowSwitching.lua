@@ -26,10 +26,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "o", function()
   focusWindow("Microsoft Outlook")
 end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
-  focusWindow("Citrix SSO")
-end)
-
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, ".", function()
   focusWindow("Cisco Webex Meetings", "Webex")
 end)
