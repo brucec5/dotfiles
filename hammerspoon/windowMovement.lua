@@ -14,13 +14,19 @@ local mash = {
   move = {"alt", "ctrl", "cmd"},
 }
 
-function ignoreWindow(win)
+function ignoreWindow(win, app)
   for _, title in ipairs(ignoredWindows) do
     logger.d("comparing " .. title .. " to " .. win:title())
     if win:title() == title then
       return true
     end
   end
+
+  if app:name() == "Microsoft Outlook" and win:title():match("%d Reminders?") then
+    logger.d("ignoring " .. win:title() .. " due to it being the outlook reminders")
+    return true
+  end
+
   return false
 end
 
@@ -28,10 +34,14 @@ end
 -- To work around that, we reimplement frontmostWindow to also take into account
 -- an "ignore" list of window titles.
 function getFrontmostWindow()
+  local w = hs.window.focusedWindow()
+  if w then return w end
+
   for _, win in ipairs(hs.window.orderedWindows()) do
     local app = win:application()
+    logger.d("win: " .. win:title() .. " attr: " .. tostring(win:subrole()))
 
-    if ignoreWindow(win) then
+    if ignoreWindow(win, app) then
       logger.d(win:title() .. " ignored")
     elseif (app and app:title() ~= "Hammerspoon") or win:subrole() ~= "AXUnknown" then
       return win
