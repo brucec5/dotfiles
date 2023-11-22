@@ -1,47 +1,35 @@
-function focusWindow(appName)
-  local theApp = hs.application.get(appName)
-  if theApp then
-    local theWindow = theApp:mainWindow()
+local logger = hs.logger.new("windowSwitching", "info")
 
-    if theWindow then
-      theWindow:focus()
+function focusWindow(...)
+  local arg = {...}
+  for i, appName in ipairs(arg) do
+    local theApp = hs.application.get(appName)
+    if theApp then
+      local theWindow = theApp:mainWindow()
+
+      if theWindow then
+        theWindow:focus()
+        return
+      end
     end
   end
 end
 
+hs.application.enableSpotlightForNameSearches(true)
+
 -- Static application switcher keybinds
-hs.hotkey.bind({"cmd", "ctrl"}, "/", function()
-  focusWindow("Slack")
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function()
+  focusWindow("Microsoft Teams")
 end)
 
--- Application Switcher
-switcher = hs.window.switcher.new()
-
-hs.hotkey.bind(
-  {"alt"},
-  "tab",function() switcher:next() end,
-  nil,
-  function() switcher:next() end
-)
-
-hs.hotkey.bind(
-  {"alt", "shift"},
-  "tab",function() switcher:previous() end,
-  nil,
-  function() switcher:previous() end
-)
-
--- Hints
-hs.hints.showTitleThresh = 10
-hs.hints.style = "vimperator"
-
-hs.hotkey.bind({"cmd"}, "escape", function()
-  hs.hints.windowHints()
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "o", function()
+  focusWindow("Microsoft Outlook")
 end)
 
--- Hints for focused window's application
-hs.hotkey.bind({"alt"}, "escape", function()
-  hs.hints.windowHints(
-    hs.window.focusedWindow():application():allWindows()
-  )
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, ".", function()
+  focusWindow("Cisco Webex Meetings", "Webex")
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, ",", function()
+  focusWindow("iTerm2")
 end)

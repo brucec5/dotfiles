@@ -6,3 +6,5 @@
 *.swo
 tags
 .byebug_history
+*.sublime-project
+*.sublime-workspace

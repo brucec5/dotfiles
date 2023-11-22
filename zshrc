@@ -16,61 +16,28 @@ ZSH_CUSTOM=$HOME/dotfiles/oh-my-zsh/custom
 # time that oh-my-zsh is loaded.
 ZSH_THEME="mytheme-custom"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+zstyle ':omz:update' frequency 7
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(docker git colored-man-pages)
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # Customize to your needs...
 
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
 
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$GOPATH/bin:$GOROOT/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$GOPATH/bin:$GOROOT/bin:$HOME/Library/Python/3.7/bin
 
 # If neovim is installed, alias that to vim because muscle memory
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
-fi
-
-if [ $(uname) != "Linux" ]; then
-  export EDITOR=subl
+  export EDITOR=nvim
+  export GIT_EDITOR=nvim
 else
   export EDITOR=vim
+  export GIT_EDITOR=vim
 fi
-export GIT_EDITOR=vim
 
 alias untouch='rm'
 
@@ -78,7 +45,6 @@ alias reload='source ~/.zshrc'
 
 alias cdfinder="cd \"\$(osascript -e 'tell app \"Finder\" to POSIX path of (insertion location as alias)')\""
 
-alias vim='nocorrect /usr/bin/vim'
 alias git='nocorrect git'
 alias got='nocorrect git'
 alias gut='nocorrect git'
@@ -86,9 +52,7 @@ alias fig='nocorrect git'
 alias gph='nocorrect git push origin HEAD'
 alias gs='nocorrect git status'
 alias gc='nocorrect git commit'
-alias gca='nocorrect git commit -a'
 alias gcm='nocorrect git commit -m'
-alias gcam='nocorrect git commit -am'
 alias gcundo='nocorrect git reset --soft "HEAD^"'
 alias glog='nocorrect git log'
 alias glogd='nocorrect git log ..develop'
@@ -97,7 +61,7 @@ alias gslog='release-notes'
 alias gco='nocorrect git checkout'
 alias gcob='nocorrect git checkout -b'
 alias gcod='nocorrect git checkout develop'
-alias gcom='nocorrect git checkout master'
+alias gcom='do-on-main-branch checkout'
 alias gcop='nocorrect git checkout -p'
 alias gpu='nocorrect git pull'
 alias gpuu='nocorrect git pull origin $(this-branch)'
@@ -106,6 +70,7 @@ alias gstp='nocorrect git stash pop'
 alias gstl='nocorrect git stash list'
 alias gssc='gss | wc -l | tr -d " "'
 alias gdd='git diff develop'
+alias gdm='do-on-main-branch diff'
 alias gddh='git diff develop HEAD'
 alias gdr='git diff -R'
 alias gds='git diff --staged'
@@ -117,7 +82,6 @@ alias ggraph='git log --oneline --graph --decorate'
 alias gap='git add --patch'
 alias gsl='git stash list'
 alias gstd='git stash show -p'
-alias gversion='git describe origin/master'
 alias gcp='nocorrect git cherry-pick'
 alias gconflict="git ls-files -u  | cut -f 2 | sort -u | tr '\n' ' '"
 alias gus="nocorrect git unstage"
@@ -138,39 +102,31 @@ function this-branch() {
   git rev-parse --abbrev-ref HEAD
 }
 
-function merged-branches() {
-  git branch --merged | ggrep -Pv "..(develop|master|$(this-branch))"
-}
-
-function delete-merged-branches() {
-  merged-branches | xargs -n 1 git branch -d
-}
-
 function git-commit-diff() {
   git diff "$1^!"
 }
 
-function release-notes() {
-  GVERSION=${1-`gversion`}
-  git --no-pager shortlog --first-parent --format="[%h] %s" $GVERSION..HEAD
-  echo "==== OLD VERSION FOR POSTERITY ====\n"
-  git --no-pager shortlog --format="[%h] %s" --grep "pull request" $GVERSION..HEAD
+function git-branch-exists() {
+  local branch=$1
+  git show-ref --verify --quiet "refs/heads/$branch"
+}
+
+# gcom used to be an alias to checkout the master branch,
+# but now it's a function to checkout either master or main, whichever one exists.
+function do-on-main-branch() {
+  local action=$1
+  if git-branch-exists main; then
+    git "$action" main
+  elif git-branch-exists master; then
+    git "$action" master
+  else
+    echo "There is no main or master branch, can't do that"
+    return 1
+  fi
 }
 
 function mac2unix {
-  cat $1 | tr '\r' '\n'
-}
-
-# Switch between partner apps
-function switch-partner() {
-  printf "Switching partner from $(sed -e 's/app: //' config/partner.yml) to $1..."
-  echo "app: $1" > config/partner.yml;
-  rake assets:clobber 2> /dev/null;
-        rm -rf tmp/cache/assets/development/sass;
-        rm -rf tmp/cache/assets/development/sprockets;
-        rm -rf tmp/cache/sprockets;
-  powder restart;
-  echo "Done."
+  tr '\r' '\n' < "$1"
 }
 
 # Usage: lazy-source executable-to-load-on path-to-source
@@ -180,11 +136,11 @@ function lazy-source() {
 
 function logtail() {
   # TODO: make the syntax highlighting more general? currently only highlights HTTP status codes (or similar looking things)
-  tail -f $* | perl -pe 's/ [0-9]{3} [A-Za-z\s]+/\e[1;34m$&\e[0m/g'
+  tail -f "$@" | perl -pe 's/ [0-9]{3} [A-Za-z\s]+/\e[1;34m$&\e[0m/g'
 }
 
 # Keybindings!
-if [ $(uname) != "Linux" ]; then
+if [ "$(uname)" != "Linux" ]; then
   bindkey '[C' forward-word
   bindkey '[D' backward-word
 fi
@@ -197,3 +153,10 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
   unsetopt xtrace
   exec 2>&3 3>&-
 fi
+
+export JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true
+
+export LOG4J_FORMAT_MSG_NO_LOOKUPS=true
+
+# No idea why, but on osx tab completion no longer works unless I explicitly compinit.
+compinit

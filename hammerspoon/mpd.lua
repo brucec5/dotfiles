@@ -11,7 +11,7 @@ hs.hotkey.bind({"cmd"}, "f9", function()
 end)
 
 hs.hotkey.bind({"cmd", "shift"}, "f8", function()
-  hs.execute(os.getenv("HOME") ..  "/dotfiles/bin/mpdnotify-mac", true)
+  hs.execute(os.getenv("HOME") ..  "/dotfiles/bin/mpdnotify-mac status", true)
 end)
 
 hs.hotkey.bind({"cmd", "ctrl", "alt"}, "p", function()

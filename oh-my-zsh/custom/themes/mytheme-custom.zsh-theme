@@ -8,6 +8,12 @@ function _exit_status() {
   fi
 }
 
+function _proxy_setting_prompt() {
+  if [ -n "$HTTP_PROXY_NAME" ]; then
+    echo "%{%F{blue}%}<$HTTP_PROXY_NAME>%{%f%k%b%} "
+  fi
+}
+
 ZSH_THEME_GIT_PROMPT_PREFIX="%{%B%F{green}%}[%{%B%F{blue}%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{%f%k%b%B%F{green}%}]"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{%F{red}%}*%{%f%k%b%}"
@@ -31,12 +37,12 @@ precmd () {
   fi
 }
 
-_AWS_OKTA_PROMPT=''
+# _AWS_OKTA_PROMPT=''
 
-if [ -n "$AWS_OKTA_PROFILE" ]; then
-  _AWS_OKTA_PROMPT="%{%b%F{green}%}(aws: $AWS_OKTA_PROFILE) "
-fi
+# if [ -n "$AWS_OKTA_PROFILE" ]; then
+#   _AWS_OKTA_PROMPT="%{%b%F{green}%}(aws: $AWS_OKTA_PROFILE) "
+# fi
 
 PROMPT='%{%f%k%b%}
-%{%b%F{yellow}%}(level $SHLVL) %{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_exit_status) %{%b%F{yellow}%}%~ $_AWS_OKTA_PROMPT$(git_prompt_info)%E%{%f%k%b%}
+%{%b%F{yellow}%}(level $SHLVL) %{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_exit_status) %{%b%F{yellow}%}%~ $(_proxy_setting_prompt)$(git_prompt_info)%E%{%f%k%b%}
 %{%b%F{cyan}%}%m %{%f%k%b%}%# '
