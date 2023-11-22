@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# monitor changes to alsa and send a signal to waybar
-stdbuf -oL alsactl monitor | while read; do
-  pkill -x -RTMIN+8 waybar
-done
