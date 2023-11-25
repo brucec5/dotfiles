@@ -69,8 +69,8 @@ theme.menu_width  = 100
 
 -- {{{ Icons
 -- {{{ Taglist
-theme.taglist_squares_sel   = "~/.config/awesome/themes/nordic/taglist/squarefz.png"
-theme.taglist_squares_unsel = "~/.config/awesome/themes/nordic/taglist/squarez.png"
+--theme.taglist_squares_sel   = "~/.config/awesome/themes/nordic/taglist/squarefz.png"
+--theme.taglist_squares_unsel = "~/.config/awesome/themes/nordic/taglist/squarez.png"
 --theme.taglist_squares_resize = "false"
 -- }}}
 

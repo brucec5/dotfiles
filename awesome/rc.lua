@@ -1,5 +1,6 @@
 -- Standard awesome library
 local gears = require("gears")
+local gmath = require("gears.math")
 local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
@@ -12,6 +13,7 @@ local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local volumebar_widget = require("awesome-wm-widgets.volumebar-widget.volumebar")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
@@ -55,6 +57,12 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/chris/.config/awesome/themes/nordic/theme.lua")
 
+do
+  -- Blur the current wallpaper for the lockscreen to use as a background
+
+  awful.spawn("/usr/bin/convert " .. beautiful.wallpaper .. " -blur 0x8 /home/chris/Pictures/wallpaper/lockscreen.png")
+end
+
 function colorify_range(text, mid_boundary, high_boundary)
   mid_boundary = mid_boundary or 50
   high_boundary = high_boundary or 80
@@ -75,7 +83,7 @@ end
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -139,7 +147,9 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
-monthcalendar = awful.widget.calendar_popup.month()
+monthcalendar = awful.widget.calendar_popup.month({
+  start_sunday = true
+})
 monthcalendar:attach(mytextclock, 'tr')
 
 separator = wibox.widget.textbox(' ')
@@ -158,20 +168,16 @@ memwidget = ram_widget({
   widget_unused_color = beautiful.fg_accent
 })
 
-mpdwidget = lain.widget.mpd({
-  settings = function()
-    formatted_output = mpd_now.artist .. ' - ' .. mpd_now.title
-    if mpd_now.track ~= "N/A" then
-      formatted_output = mpd_now.track .. ' - ' .. formatted_output
-    end
-    widget:set_markup(markup.fg.color(beautiful.fg_accent, ' ' .. formatted_output))
-  end,
-  music_dir = "/mnt/shared/Music"
-})
-
 alsawidget = volumebar_widget({
   timeout = 3,
   mute_color = beautiful.bg_urgent
+})
+
+batterywidget = battery_widget({
+  font = beautiful.font,
+  warning_msg_title = "The battery's dyin', Cloud!",
+  warning_msg_icon = os.getenv("HOME") .. ".config/awesome/barret.png",
+  warning_msg_position = "top_right"
 })
 
 thermwidget = lain.widget.temp({
@@ -277,7 +283,11 @@ awful.screen.connect_for_each_screen(function(s)
     )
   )
   -- Create a taglist widget
-  s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
+  s.mytaglist = awful.widget.taglist {
+    screen = s,
+    filter = function (t) return t.selected or #t:clients() > 0 end,
+    buttons = taglist_buttons
+  }
 
   -- Create a tasklist widget
   s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
@@ -296,7 +306,6 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      mpdwidget,
       netwidget,
       separator,
       wibox.widget.textbox('CPU:'),
@@ -312,6 +321,8 @@ awful.screen.connect_for_each_screen(function(s)
       wibox.widget.textbox('ALSA:'),
       separator,
       alsawidget,
+      separator,
+      batterywidget,
       separator,
       redshiftwidget,
       separator,
@@ -333,6 +344,21 @@ root.buttons(
 -- }}}
 
 -- {{{ Key bindings
+
+local function move_to_tag_delta(delta)
+  local c = client.focus
+  if not c then return end
+
+  local t = c.first_tag
+  if not t then return end
+
+  local tags = c.screen.tags
+  local idx = t.index
+
+  local next = tags[gmath.cycle(#tags, idx + delta)]
+  c:move_to_tag(next)
+end
+
 globalkeys = awful.util.table.join(
   awful.key(
     { modkey }, "s",
@@ -471,6 +497,21 @@ globalkeys = awful.util.table.join(
   ),
 
   awful.key(
+    { modkey, "Shift" }, "Right",
+    function()
+      move_to_tag_delta(1)
+    end,
+    { description = "Move client to next tag", group = "tag" }
+  ),
+  awful.key(
+    { modkey, "Shift" }, "Left",
+    function()
+      move_to_tag_delta(-1)
+    end,
+    { description = "Move client to previous tag", group = "tag" }
+  ),
+
+  awful.key(
     { modkey, "Control" }, "n",
     function ()
       local c = awful.client.restore()
@@ -536,6 +577,26 @@ globalkeys = awful.util.table.join(
     function() awful.util.spawn('/usr/bin/amixer -q sset Master 4%+ unmute') end,
     { description = "Increase volume", group = "audio" }
   ),
+  awful.key(
+    { }, "XF86AudioMute",
+    function() awful.util.spawn('/usr/bin/amixer -q set Master toggle') end,
+    { description = "Toggle mute", group = "audio" }
+  ),
+  awful.key(
+    { }, "XF86AudioLowerVolume",
+    function() awful.util.spawn('/usr/bin/amixer -q sset Master 4%- unmute') end,
+    { description = "Decrease volume", group = "audio" }
+  ),
+  awful.key(
+    { }, "XF86AudioRaiseVolume",
+    function() awful.util.spawn('/usr/bin/amixer -q sset Master 4%+ unmute') end,
+    { description = "Increase volume", group = "audio" }
+  ),
+  awful.key(
+    { }, "XF86AudioPlay",
+    function() awful.util.spawn('/usr/bin/playerctl play-pause') end,
+    { description = "Toggle play/pause", group = "audio" }
+  ),
 
   awful.key(
     { modkey, "Shift" }, "F11",
@@ -546,27 +607,6 @@ globalkeys = awful.util.table.join(
     { modkey, "Shift" }, "F12",
     function() awful.util.spawn('/usr/bin/amixer -q sset Master 2%+ unmute') end,
     { description = "Increase volume a bit", group = "audio" }
-  ),
-
-  awful.key(
-    { modkey }, "F6",
-    function() awful.util.spawn('/usr/bin/mpc stop') end,
-    { description = "Stop MPD", group = "audio" }
-  ),
-  awful.key(
-    { modkey }, "F7",
-    function() awful.util.spawn('/usr/bin/mpc prev') end,
-    { description = "Previous MPD track", group = "audio" }
-  ),
-  awful.key(
-    { modkey }, "F8",
-    function() awful.util.spawn('/usr/bin/mpc toggle') end,
-    { description = "Pause/unpause MPD", group = "audio" }
-  ),
-  awful.key(
-    { modkey }, "F9",
-    function() awful.util.spawn('/usr/bin/mpc next') end,
-    { description = "Next MPD track", group = "audio" }
   )
 )
 
