@@ -160,3 +160,6 @@ export LOG4J_FORMAT_MSG_NO_LOOKUPS=true
 
 # No idea why, but on osx tab completion no longer works unless I explicitly compinit.
 compinit
+
+# Unalias oh-my-zsh aliases that I don't like
+unalias gp
