@@ -25,7 +25,7 @@ source "$ZSH/oh-my-zsh.sh"
 # Customize to your needs...
 
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
+#export GOROOT=/usr/local/go
 
 PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$GOPATH/bin:$GOROOT/bin:$HOME/Library/Python/3.7/bin
 
@@ -100,6 +100,12 @@ alias cspec="script/spec -c -f n"
 
 function this-branch() {
   git rev-parse --abbrev-ref HEAD
+}
+
+function track-remote() {
+  local b
+  b=$(this-branch)
+  git branch --set-upstream-to="origin/$b" "$b"
 }
 
 function git-commit-diff() {
