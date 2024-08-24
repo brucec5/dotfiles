@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -eo pipefail
+
+cmd=${1?"a command must be specified"}
+destination=$2
+
+if [ "$destination" = "paste" ]; then
+  output_file="-"
+  output_desc="clipboard"
+elif [ -n "$destination" ]; then
+  output_file=$destination
+  output_desc=$output_file
+else
+  screenshots_dir=$HOME/screenshots
+  output_file=$screenshots_dir/$(date +'screenshot-%F-%H-%M-%S.png')
+  output_desc=$output_file
+  mkdir -p "$screenshots_dir"
+fi
+
+case "$cmd" in
+  monitor)
+    grim -o "$(hyprctl -j activeworkspace | jq -r '.monitor')" "$output_file"
+    ;;
+  window)
+    window_region=$(hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+    grim -g "$window_region" "$output_file"
+    ;;
+  region)
+    grim -g "$(slurp)" "$output_file"
+    ;;
+  *)
+    echo "Unknown command '$cmd'" >&2
+    exit 1
+    ;;
+esac
+
+notify-send "Screenshot Taken" "Saved to $output_desc"
