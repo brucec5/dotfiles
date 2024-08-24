@@ -1,124 +1,283 @@
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["custom/alsa", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "tray", "clock"],
-    // Modules configuration
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
+    "layer": "bottom",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "gtk-layer-shell": true,
+    "margin-bottom": -1,
+    "passthrough": false,
+    "height": 22,
+    "modules-left": [
+        "hyprland/submap",
+        "hyprland/workspaces",
+        "custom/arrow10",
+        "wlr/taskbar"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "custom/arrow9",
+        "mpd",
+        "custom/arrow8",
+        "cpu",
+        "custom/arrow7",
+        "temperature",
+        "custom/arrow6",
+        "memory",
+        "custom/arrow5",
+        "pulseaudio",
+        "custom/arrow4",
+        "network",
+        "custom/arrow3",
+        "battery",
+        "custom/arrow2",
+        "custom/updates",
+        "custom/arrow1",
+        "custom/notification",
+        "custom/arrow0",
+        "tray",
+        "custom/arrow-a",
+        "clock"
+    ],
+    "custom/arrow-a": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
     },
-    "sway/workspaces": {
-        "disable-scroll": true
+    "custom/arrow0": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
     },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+    "custom/arrow1": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow2": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow3": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow4": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow5": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow6": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow7": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow8": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow9": {
+      "exec": "waybar-print-arrow left",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/arrow10": {
+      "exec": "waybar-print-arrow right",
+      "interval": "once",
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/notification": {
+      "tooltip": false,
+      "format": "{icon}",
+      "format-icons": {
+        "notification": "<span foreground='red'><sup></sup></span>",
+        "none": "",
+        "dnd-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-none": "",
+        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+    "custom/updates": {
+      "format": "{icon} {}",
+      "return-type": "json",
+      "format-icons": {
+        "has-updates": "󱍷",
+        "updated": "󰂪"
+      },
+      "exec-if": "which waybar-module-pacman-updates",
+      "exec": "waybar-module-pacman-updates --interval-seconds 60 --network-interval-seconds 300 --no-zero-output"
     },
     "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 2,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
+      "format": "{stateIcon} {singleIcon}{consumeIcon}{randomIcon}{repeatIcon} {artist} - {title} ",
+      "format-disconnected": "disconnected",
+      "consume-icons": {
+        "on": " "
+      },
+      "random-icons": {
+        "on": " "
+      },
+      "repeat-icons": {
+        "on": " "
+      },
+      "single-icons": {
+          "on": "1 "
+      },
+      "state-icons": {
+          "paused": "",
+          "playing": ""
+      },
+      "on-click": "mpc toggle"
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 10
-    },
-    "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%H:%M %a %b %d}",
-        "format-alt": "{:%Y-%m-%d}"
+    "hyprland/workspaces": {
+        "spacing": 16,
+        "on-scroll-up": "hyprctl dispatch workspace r+1",
+        "on-scroll-down": "hyprctl dispatch workspace r-1"
     },
     "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "states": {
-            "warning": 60,
-            "critical": 90
-        },
-        "format": "{}% "
+        "interval": 5,
+        "format": "  {usage}%",
+        "max-length": 10
     },
     "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+        "input-filename": "temp2_input",
+        "critical-threshold": 75,
+        "tooltip": false,
+        "format": " {temperatureC}°C"
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
+    "disk": {
+        "interval": 30,
+        "format": "󰋊 {percentage_used}%",
+        "path": "/",
+        "tooltip": true,
+        "unit": "GB",
+        "tooltip-format":  "Available {free} of {total}"
+    },
+    "memory": {
+        "interval": 10,
+        "format": "  {percentage}%",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "RAM - {used:0.1f}GiB used"
+    },
+    "wlr/taskbar": {
+        "format": "{icon} {title:.17}",
+        "icon-size": 12,
+        "on-click-middle": "close",
+        "tooltip-format": "{title}",
+        "ignore-list": [],
+        "on-click": "activate"
+    },
+    "tray": {
+        "spacing": 3
+    },
+    "clock": {
+        "format": "{:%R %m/%d}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "network": {
+        "format-wifi": "{icon}",
+        "format-ethernet": "",
+        "format-disconnected": "󰌙",
+        "format-icons": [
+            "󰤯 ",
+            "󰤟 ",
+            "󰤢 ",
+            "󰤢 ",
+            "󰤨 "
+        ]
     },
     "battery": {
         "states": {
-            // "good": 95,
+            "good": 95,
             "warning": 30,
-            "critical": 15
+            "critical": 20
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "󰂎",
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ]
     },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Network Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-    "custom/alsa": {
-        "format": "alsa: {}",
-        "exec": "$HOME/dotfiles/bin/alsa-volume",
-        "on-click": "amixer set Master toggle",
-        "signal": 8,
-        "interval": "once",
-        "tooltip": false
+    "pulseaudio": {
+        "max-volume": 150,
+        "scroll-step": 5,
+        "format": "{icon}",
+        "tooltip-format": "{volume}%",
+        "format-muted": " ",
+        "format-icons": {
+            "default": [
+                " ",
+                " ",
+                " "
+            ]
+        },
+        "on-click": "pamixer -t"
     }
 }
-

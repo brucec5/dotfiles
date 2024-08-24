@@ -1,231 +1,295 @@
-@import url("/home/chris/dotfiles/color-schemes/output/nordic/waybar/style.css");
+@define-color black                #2f1d2e;
+@define-color brgray                #776d70;
+@define-color red                #ef6154;
+@define-color brred                #ef6154;
+@define-color green                #48b685;
+@define-color brgreen               #48b685;
+@define-color yellow                #fec418;
+@define-color bryellow               #fec418;
+@define-color blue                #05b6ef;
+@define-color brblue               #05b6ef;
+@define-color purple                #805ba3;
+@define-color brpurple               #805ba3;
+@define-color aqua                #5bc4be;
+@define-color braqua               #5bc4be;
+@define-color gray                #a39d9b;
+@define-color white               #e6e9da;
+@define-color bg2 #2f1d2e;
+
+@define-color warning 	@bryellow;
+@define-color critical	@red;
+@define-color mode	@black;
+@define-color unfocused	@bg2;
+@define-color focused	@purple;
+@define-color inactive	@purple;
+@define-color fg  @white;
+
+@define-color mpd	@yellow;
+@define-color cpu	@blue;
+@define-color temp	@green;
+@define-color memory	@aqua;
+@define-color sound	@purple;
+@define-color network	@yellow;
+@define-color battery	@blue;
+@define-color updates @green;
+@define-color notification @aqua;
+@define-color tray  @purple;
+@define-color time	@yellow;
+
+@keyframes blink-critical {
+	to {
+		background-color: @critical;
+	}
+}
 
 * {
-    border: none;
-    border-radius: 0;
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Helvetica, Arial;
-    font-size: 13px;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	box-shadow: none;
+	text-shadow: none;
+  icon-shadow: none;
 }
 
-window#waybar {
-    background-color: @base-background;
-    border-bottom: 3px solid @base-background-bright;
-    color: @base-foreground;
-    transition-property: background-color;
-    transition-duration: .5s;
+#waybar {
+  background:  @bg2;
+  color: @white;
+  font-family: "ComicShannsMono Nerd Font", "Ubuntu";
+  font-size: 10pt;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+#custom-updates,
+#custom-notification,
+#battery,
+#clock,
+#cpu,
+#language,
+#memory,
+#submap,
+#network,
+#pulseaudio,
+#temperature,
+#tray,
+#disk {
+	padding-left: 8pt;
+	padding-right: 8pt;
+}
+
+#submap,
+#memory.critical,
+#cpu.critical,
+#temperature.critical,
+#battery.critical.discharging {
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-name: blink-critical;
+	animation-duration: 1s;
+}
+
+#network.disconnected,
+#memory.warning,
+#cpu.warning,
+#temperature.warning,
+#battery.warning.discharging {
+	color: @warning;
+}
+
+#submap {
+	color: @white;
+	background: @mode;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: @base-foreground;
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
+	padding-left: 2pt;
+	padding-right: 2pt;
+	color: @white;
+	background: @unfocused;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-#workspaces button:hover {
-    background: @base-background-bright;
-    box-shadow: inset 0 -3px @base-foreground;
+/* Inactive (on unfocused output) */
+#workspaces button.visible {
+	color: @black;
+	background: @focused;
 }
 
-#workspaces button.focused {
-    background-color: @base-background-bright;
-    box-shadow: inset 0 -3px @base-foreground;
-}
-
+/* Contains an urgent window */
 #workspaces button.urgent {
-    background-color: @base-urgent;
-    color: @base-background;
+	color: @black;
+	background: @warning;
 }
 
-#mode {
-    background-color: @base-background-bright;
-    border-bottom: 3px solid @base-foreground;
+/* Style when cursor is on the button */
+#workspaces button:hover {
+	background: @focused;
+	color: @black;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#mpd,
-#custom-alsa {
-    padding: 0 10px;
-    margin-left: 5px;
-    color: @base-foreground;
-}
-
-#window,
-#workspaces {
-    margin: 0 4px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-#clock {
-    background-color: @base-background-bright;
-}
-
-#battery {
-}
-
-#battery.charging, #battery.full {
-    color: @base02;
-}
-
-@keyframes blink {
-    to {
-        background-color: @base-background-bright;
-    }
-}
-
-#battery.critical:not(.charging) {
-    background-color: @base-urgent;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-label:focus {
-    background-color: #000000;
-}
-
-widget > label {
-    box-shadow: inset 0 -3px @base-background-bright;
-    background-color: @base-background;
-}
-
-#cpu {
-}
-
-#memory {
-}
-
-#memory.warning {
-    background-color: @base03;
-    color: @base-background;
-}
-
-#memory.critical {
-    background-color: @base-urgent;
-    color: @base-background;
-}
-
-#disk {
-    background-color: @base-background-bright;
-}
-
-#backlight {
-    color: @base-foreground;
-}
-
-#network {
-}
-
-#network.disconnected {
-    background-color: @base-urgent;
-    color: @base-background;
-}
-
-#custom-alsa {
-}
-
-#custom-alsa.muted {
-    background-color: @base-urgent;
-    color: @base-background;
-}
-
-#temperature {
-}
-
-#temperature.critical {
-    background-color: @base-urgent;
-    color: @base-background;
-}
-
-#tray {
-    background-color: #2980b9;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+#window {
+	margin-right: 35pt;
+	margin-left: 35pt;
 }
 
 #mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
+  background: @mpd;
+  color: @black;
 }
 
-#mpd.disconnected {
-    background-color: #f53c3c;
+#pulseaudio {
+	background: @sound;
+	color: @black;
 }
 
-#mpd.stopped {
-    background-color: #90b1b1;
+#network {
+	background: @network;
+	color: @black;
 }
 
-#mpd.paused {
-    background-color: #51a37a;
+#memory {
+	background: @memory;
+	color: @black;
+}
+
+#cpu {
+	background: @cpu;
+	color: @black;
+}
+
+#temperature {
+	background: @temp;
+	color: @black;
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
+	background: @layout;
+	color: @black;
 }
 
-#keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
+#battery {
+	background: @battery;
+	color: @black;
 }
 
-#keyboard-state > label {
-    padding: 0 5px;
+#tray {
+	background: @tray;
 }
 
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+#custom-updates {
+  background: @updates;
+  color: @black;
+}
+
+#custom-notification {
+  background: @notification;
+  color: @black;
+}
+
+#clock {
+	background: @time;
+	color: @black;
+}
+
+#custom-arrow-a {
+	color: @time;
+	background: @tray;
+}
+
+#custom-arrow0 {
+	color: @tray;
+	background: @notification;
+}
+
+#custom-arrow1 {
+	color: @notification;
+	background: @updates;
+}
+
+#custom-arrow2 {
+	color: @updates;
+	background: @battery;
+}
+
+#custom-arrow3 {
+	color: @battery;
+	background: @network;
+}
+
+#custom-arrow4 {
+	color: @network;
+	background: @sound;
+}
+
+#custom-arrow5 {
+	color: @sound;
+	background: @memory;
+}
+
+#custom-arrow6 {
+	color: @memory;
+	background: @temp;
+}
+
+#custom-arrow7 {
+	color: @temp;
+	background: @cpu;
+}
+
+#custom-arrow8 {
+	color: @cpu;
+	background: @mpd;
+}
+
+#custom-arrow9 {
+	color: @mpd;
+	background: transparent;
+}
+
+#custom-arrow10 {
+	color: @unfocused;
+	background: transparent;
+}
+
+.powerline.arrow {
+  font-size: 23px;
+}
+
+/*TODO: mess around with this*/
+tooltip {
+  background: @bg2;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: @white;
+}
+tooltip label{
+  color: @white;
+}
+
+#taskbar {
+}
+
+#taskbar button {
+  min-width: 130px;
+	border-bottom: 3px solid @unfocused;
+	margin-left: 2px;
+	margin-right: 2px;
+  padding: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: @white;
+	transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#taskbar button.active {
+	border-bottom: 3px solid white;
+  background: @focused;
+  color: @black;
+}
+
+#taskbar button:hover {
+	border-bottom: 3px solid @white;
+  background: @unfocused;
+	color: @white;
 }

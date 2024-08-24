@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Script to print waybar JSON for a powerline arrow character in the given direction
+# Useful for letting you specify classes to add to the widget to make styling marginally easier
+
+set -eo pipefail
+
+dir=$1
+
+if [ "$dir" = "left" ]; then
+  arrow=""
+else
+  arrow=""
+fi
+
+jq -cn --arg arrow "$arrow" --arg dir "$dir" '{"text": $arrow, "class": ["powerline", "arrow",$dir]}'
