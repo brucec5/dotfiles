@@ -51,6 +51,7 @@ set smartindent
 set smarttab
 set tabstop=2
 set wildmenu
+set notermguicolors
 
 " Map C-s to a nop???
 nnoremap <silent> <C-S> <NOP>
