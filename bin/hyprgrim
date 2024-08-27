@@ -35,4 +35,10 @@ case "$cmd" in
     ;;
 esac
 
-notify-send "Screenshot Taken" "Saved to $output_desc"
+notification_params=()
+
+if [ "$destination" != "paste" ]; then
+  notification_params+=(-i "$output_file")
+fi
+
+notify-send "${notification_params[@]}" "Screenshot Taken" "Saved to $output_desc"
