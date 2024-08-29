@@ -1,13 +1,15 @@
+local mpd_host = "192.168.0.105"
+
 hs.hotkey.bind({"cmd"}, "f7", function()
-  hs.execute("/usr/local/bin/mpc prev")
+  hs.execute("/opt/homebrew/bin/mpc --host=" .. mpd_host .. " prev")
 end)
 
 hs.hotkey.bind({"cmd"}, "f8", function()
-  hs.execute("/usr/local/bin/mpc toggle")
+  hs.execute("/opt/homebrew/bin/mpc --host=" .. mpd_host .. " toggle")
 end)
 
 hs.hotkey.bind({"cmd"}, "f9", function()
-  hs.execute("/usr/local/bin/mpc next")
+  hs.execute("/opt/homebrew/bin/mpc --host=" .. mpd_host .. " next")
 end)
 
 hs.hotkey.bind({"cmd", "shift"}, "f8", function()
