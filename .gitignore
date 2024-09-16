@@ -1,6 +1,4 @@
 .netrwhist
-*.swp
-*.swo
-vim/swp/
 ncmpcpp/error.log
 color-schemes/output
+nvim/lua/local

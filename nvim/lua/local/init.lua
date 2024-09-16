@@ -1,0 +1,2 @@
+-- dummy file to load local config in
+-- this whole directory is gitignored, so put any machine-local config in this directory
