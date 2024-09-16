@@ -1,62 +1,46 @@
-@define-color black                #2f1d2e;
-@define-color brgray                #776d70;
-@define-color red                #ef6154;
-@define-color brred                #ef6154;
-@define-color green                #48b685;
-@define-color brgreen               #48b685;
-@define-color yellow                #fec418;
-@define-color bryellow               #fec418;
-@define-color blue                #05b6ef;
-@define-color brblue               #05b6ef;
-@define-color purple                #805ba3;
-@define-color brpurple               #805ba3;
-@define-color aqua                #5bc4be;
-@define-color braqua               #5bc4be;
-@define-color gray                #a39d9b;
-@define-color white               #e6e9da;
-@define-color bg2 #2f1d2e;
+@import url("../theme/colors.css");
 
-@define-color warning 	@bryellow;
-@define-color critical	@red;
-@define-color mode	@black;
-@define-color unfocused	@bg2;
-@define-color focused	@purple;
-@define-color inactive	@purple;
-@define-color fg  @white;
+@define-color waybar-background alpha(@background, 0.3);
+@define-color waybar-foreground @foreground;
 
-@define-color mpd	@yellow;
-@define-color cpu	@blue;
-@define-color temp	@green;
-@define-color memory	@aqua;
-@define-color sound	@purple;
-@define-color network	@yellow;
-@define-color battery	@blue;
-@define-color updates @green;
-@define-color notification @aqua;
-@define-color tray  @purple;
-@define-color time	@yellow;
+@define-color widget-background @color4;
+@define-color widget-background-focused @widget-background;
+@define-color widget-background-unfocused @background;
+@define-color widget-background-hover @color2;
+@define-color widget-background-urgent @color1;
+@define-color widget-background-warning @color3;
+
+@define-color widget-foreground @foreground;
+@define-color widget-foreground-focused @foreground;
+@define-color widget-foreground-unfocused @foreground;
+@define-color widget-foreground-hover @foreground;
+@define-color widget-foreground-urgent @foreground;
+@define-color widget-foreground-warning @foreground;
+
+@define-color widget-separator-color darker(@foreground);
+
+@define-color tooltip-background @background;
+@define-color tooltip-foreground @foreground;
 
 @keyframes blink-critical {
 	to {
-		background-color: @critical;
+		background-color: @widget-background-urgent;
+		color: @widget-foreground-urgent;
 	}
 }
 
 * {
   border: none;
   border-radius: 0;
-	min-height: 0;
-	margin: 0;
-	padding: 0;
-	box-shadow: none;
-	text-shadow: none;
-  icon-shadow: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  font-family: "ComicShannsMono Nerd Font", "Ubuntu";
 }
 
 #waybar {
-  background:  @bg2;
-  color: @white;
-  font-family: "ComicShannsMono Nerd Font", "Ubuntu";
+  background:  @waybar-background;
+  color: @waybar-foreground;
   font-size: 10pt;
 }
 
@@ -72,9 +56,20 @@
 #pulseaudio,
 #temperature,
 #tray,
-#disk {
-	padding-left: 8pt;
-	padding-right: 8pt;
+#disk,
+#mpd {
+  margin: 2px;
+  padding-left: 8pt;
+  padding-right: 8pt;
+  background: @widget-background;
+  color: @widget-foreground;
+  border-radius: 3px;
+}
+
+/* these widgets are icon-only and I guess they don't handle wide glyphs nicely
+ * so they need some extra padding to be centered... */
+#network, #custom-notification {
+  padding-right: 11pt;
 }
 
 #submap,
@@ -82,11 +77,11 @@
 #cpu.critical,
 #temperature.critical,
 #battery.critical.discharging {
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
-	animation-name: blink-critical;
-	animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-name: blink-critical;
+  animation-duration: 1s;
 }
 
 #network.disconnected,
@@ -94,202 +89,87 @@
 #cpu.warning,
 #temperature.warning,
 #battery.warning.discharging {
-	color: @warning;
+  background: @widget-background-warning;
+  color: @widget-foreground-warning;
 }
 
-#submap {
-	color: @white;
-	background: @mode;
+#workspaces {
+  margin: 2px;
+  border-radius: 3px;
 }
 
 #workspaces button {
-	padding-left: 2pt;
-	padding-right: 2pt;
-	color: @white;
-	background: @unfocused;
+  padding-left: 2pt;
+  padding-right: 2pt;
+  color: @widget-foreground-unfocused;
+  background: @widget-background-unfocused;
 }
 
-/* Inactive (on unfocused output) */
+#workspaces button:first-child {
+  border-radius: 3px 0 0 3px;
+}
+
+#workspaces button:last-child {
+  border-radius: 0 3px 3px 0;
+}
+
 #workspaces button.visible {
-	color: @black;
-	background: @focused;
+  color: @widget-foreground-focused;
+  background: @widget-background-focused;
 }
 
-/* Contains an urgent window */
 #workspaces button.urgent {
-	color: @black;
-	background: @warning;
+  color: @widget-foreground-urgent;
+  background: @widget-background-urgent;
 }
 
-/* Style when cursor is on the button */
 #workspaces button:hover {
-	background: @focused;
-	color: @black;
+  color: @widget-foreground-hover;
+  background: @widget-background-hover;
 }
 
-#window {
-	margin-right: 35pt;
-	margin-left: 35pt;
-}
-
-#mpd {
-  background: @mpd;
-  color: @black;
-}
-
-#pulseaudio {
-	background: @sound;
-	color: @black;
-}
-
-#network {
-	background: @network;
-	color: @black;
-}
-
-#memory {
-	background: @memory;
-	color: @black;
-}
-
-#cpu {
-	background: @cpu;
-	color: @black;
-}
-
-#temperature {
-	background: @temp;
-	color: @black;
-}
-
-#language {
-	background: @layout;
-	color: @black;
-}
-
-#battery {
-	background: @battery;
-	color: @black;
-}
-
-#tray {
-	background: @tray;
-}
-
-#custom-updates {
-  background: @updates;
-  color: @black;
-}
-
-#custom-notification {
-  background: @notification;
-  color: @black;
-}
-
-#clock {
-	background: @time;
-	color: @black;
-}
-
-#custom-arrow-a {
-	color: @time;
-	background: @tray;
-}
-
-#custom-arrow0 {
-	color: @tray;
-	background: @notification;
-}
-
-#custom-arrow1 {
-	color: @notification;
-	background: @updates;
-}
-
-#custom-arrow2 {
-	color: @updates;
-	background: @battery;
-}
-
-#custom-arrow3 {
-	color: @battery;
-	background: @network;
-}
-
-#custom-arrow4 {
-	color: @network;
-	background: @sound;
-}
-
-#custom-arrow5 {
-	color: @sound;
-	background: @memory;
-}
-
-#custom-arrow6 {
-	color: @memory;
-	background: @temp;
-}
-
-#custom-arrow7 {
-	color: @temp;
-	background: @cpu;
-}
-
-#custom-arrow8 {
-	color: @cpu;
-	background: @mpd;
-}
-
-#custom-arrow9 {
-	color: @mpd;
-	background: transparent;
-}
-
-#custom-arrow10 {
-	color: @unfocused;
-	background: transparent;
-}
-
-.powerline.arrow {
-  font-size: 23px;
-}
-
-/*TODO: mess around with this*/
 tooltip {
-  background: @bg2;
-  border-radius: 5px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: @white;
-}
-tooltip label{
-  color: @white;
+  background: @tooltip-background;
+  color: @tooltip-foreground;
+  border-radius: 3px;
+  border: 1px @tooltip-foreground solid;
 }
 
 #taskbar {
+  margin: 2px;
 }
 
 #taskbar button {
   min-width: 130px;
-	border-bottom: 3px solid @unfocused;
-	margin-left: 2px;
-	margin-right: 2px;
   padding: 0;
   padding-left: 8px;
   padding-right: 8px;
-  color: @white;
-	transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  color: @widget-foreground-unfocused;
+  background: @widget-background-unfocused;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-left: 1px @widget-separator-color solid;
 }
 
 #taskbar button.active {
-	border-bottom: 3px solid white;
-  background: @focused;
-  color: @black;
+  background: @widget-background-focused;
+  color: @widget-foreground-focused;
+}
+
+#taskbar button.urgent {
+  background: @widget-background-urgent;
+  color: @widget-foreground-urgent;
 }
 
 #taskbar button:hover {
-	border-bottom: 3px solid @white;
-  background: @unfocused;
-	color: @white;
+  background: @widget-background-hover;
+  color: @widget-foreground-hover;
+}
+
+#taskbar button:first-child {
+  border-radius: 3px 0 0 3px;
+  border: none;
+}
+
+#taskbar button:last-child {
+  border-radius: 0 3px 3px 0;
 }

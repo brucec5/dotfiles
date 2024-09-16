@@ -1,20 +1,20 @@
 @import url("../theme/colors.css");
 
-@define-color cc-bg alpha(@bg2, 0.7);
-@define-color noti-border-color @purple;
-@define-color noti-bg alpha(@bg2, 0.7);
+@define-color cc-bg alpha(@background, 0.7);
+@define-color noti-border-color @color5;
+@define-color noti-bg alpha(@background, 0.7);
 @define-color noti-bg-opaque rgb(48, 48, 48);
 @define-color noti-bg-darker rgb(38, 38, 38);
 @define-color noti-bg-hover alpha(@noti-bg, 1);
-@define-color noti-bg-hover-opaque @aqua;
+@define-color noti-bg-hover-opaque @color6;
 @define-color noti-bg-focus rgba(68, 68, 68, 0.6);
 @define-color noti-close-bg rgba(255, 255, 255, 0.1);
 @define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
-@define-color text-color @white;
+@define-color text-color @foreground;
 @define-color text-color-disabled darker(@text-color);
 @define-color bg-selected rgb(0, 128, 255);
-@define-color progress-bar @purple;
-@define-color progress-bar-bg darker(@bg2);
+@define-color progress-bar @color5;
+@define-color progress-bar-bg darker(@background);
 
 * {
   font-family: "ComicShannsMono Nerd Font";
