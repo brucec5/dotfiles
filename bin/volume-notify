@@ -1,0 +1,44 @@
+#!/bin/bash
+
+icon_dir=$HOME/.config/theme
+
+is-muted() {
+  status=$(pamixer --get-mute)
+  test "$status" = "true"
+}
+
+get-volume() {
+  pamixer --get-volume
+}
+
+show-notification() {
+  local action=$1
+
+  if is-muted; then
+    notify-send -e -h string:x-canonical-private-synchronous:volume_notif -u low -i "$icon_dir/audio-volume-muted-symbolic.svg" "Volume Muted"
+  else
+    vol=$(get-volume)
+    notify-send -e -h "int:value:$vol" -h string:x-canonical-private-synchronous:volume_notif -i "$icon_dir/audio-volume-high-symbolic.svg" -u low "Volume $vol%"
+  fi
+}
+
+action=$1
+shift 1
+
+case "$action" in
+  toggle-mute)
+    pamixer -t
+    ;;
+  increment)
+    pamixer -ui "$1"
+    ;;
+  decrement)
+    pamixer -ud "$1"
+    ;;
+  *)
+    echo "Unknown action $action"
+    exit 1
+    ;;
+esac
+
+show-notification
