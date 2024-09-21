@@ -67,12 +67,17 @@
     "buttons-grid": {
       "actions": [
         {
-          "label": "󰜉",
+          "label": "suspend",
+          "type": "normal",
+          "command": "systemctl suspend"
+        },
+        {
+          "label": "reboot",
           "type": "normal",
           "command": "systemctl reboot"
         },
         {
-          "label": "󰐥",
+          "label": "poweroff",
           "type": "normal",
           "command": "systemctl poweroff"
         }

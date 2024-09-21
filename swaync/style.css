@@ -1,7 +1,7 @@
 @import url("../theme/colors.css");
 
 @define-color cc-bg alpha(@background, 0.7);
-@define-color noti-border-color @color5;
+@define-color noti-border-color @color4;
 @define-color noti-bg alpha(@background, 0.7);
 @define-color noti-bg-opaque rgb(48, 48, 48);
 @define-color noti-bg-darker rgb(38, 38, 38);
@@ -13,7 +13,7 @@
 @define-color text-color @foreground;
 @define-color text-color-disabled darker(@text-color);
 @define-color bg-selected rgb(0, 128, 255);
-@define-color progress-bar @color5;
+@define-color progress-bar @color4;
 @define-color progress-bar-bg darker(@background);
 
 * {
