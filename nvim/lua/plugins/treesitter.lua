@@ -1,14 +1,18 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  config = function()
-    local configs = require("nvim-treesitter.configs")
-
-    configs.setup({
-      ensure_installed = { "lua", "vim", "rust" },
-      sync_install = false,
-      highlight = { enable = true },
-      indent = { enable = true },
-    })
-  end
+  opts = {
+    ensure_installed = {
+      "lua",
+      "vim",
+      "rust",
+      "bash",
+      "toml",
+      "json",
+      "jsonc",
+    },
+    sync_install = false,
+    highlight = { enable = true },
+    indent = { enable = true },
+  }
 }
