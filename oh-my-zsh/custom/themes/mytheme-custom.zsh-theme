@@ -44,5 +44,5 @@ precmd () {
 # fi
 
 PROMPT='%{%f%k%b%}
-%{%b%F{yellow}%}(level $SHLVL) %{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_exit_status) %{%b%F{yellow}%}%~ $(_proxy_setting_prompt)$(git_prompt_info)%E%{%f%k%b%}
+%{%B%F{blue}%}[%*] %{%b%F{yellow}%}($_elapsed[-1] sec) $(_exit_status) %{%b%F{yellow}%}%~ $(_proxy_setting_prompt)$(git_prompt_info)%E%{%f%k%b%}
 %{%f%k%b%}%# '

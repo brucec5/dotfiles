@@ -6,6 +6,11 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
   setopt xtrace prompt_subst
 fi
 
+# Load any machine-specific zshrc stuff
+if [[ -a "${HOME}/.local-zshrc" ]]; then
+  source "${HOME}/.local-zshrc"
+fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM=$HOME/dotfiles/oh-my-zsh/custom
@@ -28,7 +33,7 @@ source "$ZSH/oh-my-zsh.sh"
 export GOPATH=$HOME/go
 #export GOROOT=/usr/local/go
 
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$GOPATH/bin:$GOROOT/bin:$HOME/Library/Python/3.7/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/dotfiles/bin:$GOPATH/bin:$GOROOT/bin
 
 # If neovim is installed, alias that to vim because muscle memory
 if type nvim > /dev/null 2>&1; then
@@ -150,10 +155,6 @@ function logtail() {
 if [ "$(uname)" != "Linux" ]; then
   bindkey '[C' forward-word
   bindkey '[D' backward-word
-fi
-
-if [[ -a "${HOME}/.local-zshrc" ]]; then
-  source "${HOME}/.local-zshrc"
 fi
 
 if [[ "$PROFILE_STARTUP" == true ]]; then
