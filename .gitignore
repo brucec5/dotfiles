@@ -2,3 +2,4 @@
 ncmpcpp/error.log
 color-schemes/output
 nvim/lua/local
+hypr/hyprland.d/*

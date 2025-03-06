@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Script to make it easy to enable/disable the TV when running on the desktop
+
+set -e
+
+base_dir=$HOME/.config/hypr
+
+with_tv=$base_dir/per-computer/jupiter/monitors-with-tv.conf
+without_tv=$base_dir/per-computer/jupiter/monitors-without-tv.conf
+link_file=$base_dir/hyprland.d/monitors.conf
+
+current_setting=$(readlink "$link_file")
+
+if [ "$current_setting" = "$with_tv" ]; then
+  next_setting=$without_tv
+else
+  next_setting=$with_tv
+fi
+
+ln -sf "$next_setting" "$link_file"
