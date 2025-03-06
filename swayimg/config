@@ -40,7 +40,7 @@ scale = optimal
 # Fix position of the image on the window surface (yes/no)
 fixed = yes
 # Anti-aliasing (yes/no)
-antialiasing = no
+antialiasing = none
 # Run slideshow at startup (yes/no)
 slideshow = no
 # Slideshow image display time (seconds)
@@ -57,7 +57,7 @@ preload = 1
 # Max size of the thumbnail (pixels)
 size = 200
 # Use anti-aliasing for thumbnails (yes/no)
-antialiasing = no
+antialiasing = none
 # Background color of the window (RGBA)
 window = #00000000
 # Background color of the tile (RGBA)
