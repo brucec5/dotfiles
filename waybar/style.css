@@ -3,7 +3,7 @@
 @define-color waybar-background alpha(@background, 0.3);
 @define-color waybar-foreground @foreground;
 
-@define-color widget-background @color4;
+@define-color widget-background @color5;
 @define-color widget-background-focused @widget-background;
 @define-color widget-background-unfocused @background;
 @define-color widget-background-hover @color2;
