@@ -114,6 +114,10 @@
   border-radius: 0 3px 3px 0;
 }
 
+#workspaces button:only-child {
+  border-radius: 3px 3px 3px 3px;
+}
+
 #workspaces button.visible {
   color: @widget-foreground-focused;
   background: @widget-background-focused;
@@ -173,4 +177,8 @@ tooltip {
 
 #taskbar button:last-child {
   border-radius: 0 3px 3px 0;
+}
+
+#taskbar button:only-child {
+  border-radius: 3px 3px 3px 3px;
 }

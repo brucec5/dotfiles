@@ -85,7 +85,7 @@
           "playing": ""
       },
       "on-click": "mpc toggle",
-      "title-len": 60
+      "title-len": 50
     },
     "hyprland/workspaces": {
         "spacing": 16,
