@@ -8,8 +8,17 @@ return {
       enabled = true,
     },
     servers = {
-      lua_ls = {},
+      lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = {"vim"},
+            },
+          },
+        },
+      },
       rust_analyzer = {},
+      gopls = {},
     },
   },
   config = function(_, opts)

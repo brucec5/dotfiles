@@ -20,6 +20,7 @@ zstyle ':omz:update' frequency 7
 
 plugins=(docker git colored-man-pages)
 
+export DISABLE_AUTO_UPDATE=true
 source "$ZSH/oh-my-zsh.sh"
 
 # Customize to your needs...

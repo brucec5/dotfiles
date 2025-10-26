@@ -1,0 +1,6 @@
+[Unit]
+Description=Enable HDMI output
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "echo detect > /sys/class/drm/card0-HDMI-A-1/status"

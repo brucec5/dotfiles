@@ -10,6 +10,8 @@ return {
       "toml",
       "json",
       "jsonc",
+      "go",
+      "kdl",
     },
     sync_install = false,
     highlight = { enable = true },

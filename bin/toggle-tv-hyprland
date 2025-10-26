@@ -4,6 +4,8 @@
 
 set -e
 
+systemctl start enable-tv.service
+
 base_dir=$HOME/.config/hypr
 
 with_tv=$base_dir/per-computer/jupiter/monitors-with-tv.conf

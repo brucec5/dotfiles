@@ -97,6 +97,8 @@
         "format": "  {usage}%",
         "max-length": 10
     },
+    // TODO: use include or something to make it easier to deal with laptop/desktop differences
+    // Looks like it uses wordexp to expand the path, so it might be able to glob
     "temperature": {
         "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
         "input-filename": "temp2_input",
@@ -205,8 +207,14 @@
                 " ",
                 " ",
                 " "
+            ],
+            "hdmi": [
+                "hdmi  ",
+                "hdmi  ",
+                "hdmi  "
             ]
         },
-        "on-click": "pamixer -t"
+        "on-click": "pamixer -t",
+        "on-click-right": "/home/chris/bin/audio-switcher"
     }
 }
