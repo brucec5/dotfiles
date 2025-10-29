@@ -43,7 +43,7 @@ hs.hotkey.bind({"ctrl", "alt", "cmd"}, "d", function()
   drawMouseCircle(3)
 end)
 
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "m", function()
+hs.hotkey.bind({"ctrl", "alt", "cmd", "shift"}, "m", function()
   local win = hs.window.focusedWindow()
   local frame = win:frame()
 

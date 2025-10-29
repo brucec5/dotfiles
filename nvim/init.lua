@@ -20,3 +20,9 @@ vim.o.background = "dark"
 vim.cmd([[colorscheme gruvbox]])
 
 vim.cmd('runtime! lua/local/*.lua')
+
+vim.lsp.enable({
+  "gopls",
+  "lua_ls",
+  "rust_analyzer",
+})

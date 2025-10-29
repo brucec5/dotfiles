@@ -13,6 +13,7 @@ Plug 'wellle/targets.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 call plug#end()
 
@@ -73,7 +74,7 @@ imap <F1> <Esc>
 
 set background=dark
 try
-  colorscheme dim
+  colorscheme catppuccin
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme desert
 endtry
