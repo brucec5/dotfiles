@@ -355,7 +355,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "~/dotfiles/bin/niri-fuzzel-launch"; }
     Mod+Shift+D hotkey-overlay-title="Window switcher" { spawn "~/dotfiles/bin/niri-fuzzel-switcher"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+E { spawn "thunar"; }

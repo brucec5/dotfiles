@@ -1,0 +1,9 @@
+#!/bin/bash
+
+output=$(niri msg --json focused-output | jq -r '.name')
+
+if [ $output = "HDMI-A-1" ]; then
+  exec fuzzel --font "ComicShannsMono Nerd Font:size=30" $@
+else
+  exec fuzzel $@
+fi
